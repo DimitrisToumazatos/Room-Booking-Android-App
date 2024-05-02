@@ -1,0 +1,11 @@
+{
+  "owner": "Spanoulis",
+  "price": 90,
+  "availableDates": [["2024-07-07","2024-09-07"]],
+  "roomName": "KillBill",
+  "noOfPersons": 7,
+  "area": "Area14",
+  "stars": 5,
+  "noOfReviews": 17,
+  "roomImage": "/usr/bin/images/roomName.png"
+}

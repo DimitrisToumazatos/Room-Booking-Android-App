@@ -1,0 +1,11 @@
+{
+  "owner": "Petrusev",
+  "price": 38,
+  "availableDates": [["2024-08-28","2024-09-04"]],
+  "roomName": "Filippas",
+  "noOfPersons": 6,
+  "area": "Area13",
+  "stars": 3,
+  "noOfReviews": 13,
+  "roomImage": "/usr/bin/images/roomName.png"
+}

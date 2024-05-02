@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary95"
+    >
+
+    <TextView
+        android:id="@+id/helpCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="serif"
+        android:text="Your wish is our command 🫡"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/exitCustomer"
+        android:layout_width="201dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="48dp"
+        android:text="Exit"
+        app:layout_constraintEnd_toEndOf="@+id/helpCustomer"
+        app:layout_constraintStart_toStartOf="@+id/helpCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/helpCustomer"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="201dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="48dp"
+        android:text="Search for a room"
+        app:layout_constraintEnd_toEndOf="@+id/exitCustomer"
+        app:layout_constraintStart_toStartOf="@+id/exitCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/exitCustomer"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/rate"
+        android:layout_width="201dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="48dp"
+        android:text="Rate a room"
+        app:layout_constraintEnd_toEndOf="@+id/search"
+        app:layout_constraintStart_toStartOf="@+id/search"
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

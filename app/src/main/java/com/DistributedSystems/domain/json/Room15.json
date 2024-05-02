@@ -1,0 +1,11 @@
+{
+  "owner": "Printezis",
+  "price": 45,
+  "availableDates": [["2024-07-15","2024-08-15"]],
+  "roomName": "Saint",
+  "noOfPersons": 4,
+  "area": "Area15",
+  "stars": 4,
+  "noOfReviews": 20,
+  "roomImage": "/usr/bin/images/roomName.png"
+}

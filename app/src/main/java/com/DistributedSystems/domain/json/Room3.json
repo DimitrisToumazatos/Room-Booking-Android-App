@@ -1,0 +1,11 @@
+{
+  "owner": "Fotogiannopoulos",
+  "price": 40,
+  "availableDates": [["2024-08-01","2024-11-01"]],
+  "roomName": "roomName3",
+  "noOfPersons": 6,
+  "area": "Area3",
+  "stars": 5,
+  "noOfReviews": 20,
+  "roomImage": "/usr/bin/images/roomName.png"
+}

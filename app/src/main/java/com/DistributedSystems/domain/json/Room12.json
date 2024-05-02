@@ -1,0 +1,11 @@
+{
+  "owner": "Lountzis",
+  "price": 15,
+  "availableDates": [["2024-09-01","2024-10-01"],["2024-11-01","2024-11-06"]],
+  "roomName": "MJ",
+  "noOfPersons": 10,
+  "area": "Area12",
+  "stars": 2,
+  "noOfReviews": 17,
+  "roomImage": "/usr/bin/images/roomName.png"
+}
