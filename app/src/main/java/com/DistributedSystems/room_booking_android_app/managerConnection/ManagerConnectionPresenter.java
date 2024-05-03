@@ -11,4 +11,6 @@ public class ManagerConnectionPresenter {
         this.view = view;
     }
 
+    void onInsertRoom() {view.insertRoom();}
+
 }
