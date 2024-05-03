@@ -24,10 +24,21 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
                 presenter.onInsertRoom();
             }
         });
+
+        findViewById(R.id.exitMaster).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onExit();
+            }
+        });
     }
 
     public void insertRoom() {
         Intent intent = new Intent(ManagerConnectionActivity.this, InsertRoomActivity.class);
+        startActivity(intent);
+    }
+
+    public void exit() {
+        Intent intent = new Intent(ManagerConnectionActivity.this, HomepageActivity.class);
         startActivity(intent);
     }
 }

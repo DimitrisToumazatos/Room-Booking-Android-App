@@ -8,4 +8,5 @@ public class CustomerConnectionPresenter {
         this.view = view;
     }
 
+    public void onExit() {view.exit();}
 }
