@@ -16,6 +16,9 @@
             android:name=".insertion.InsertRoomActivity"
             android:exported="false"/>
         <activity
+            android:name=".addDates.AddDatesActivity"
+            android:exported="false"/>
+        <activity
             android:name=".managerConnection.ManagerConnectionActivity"
             android:exported="false"/>
         <activity

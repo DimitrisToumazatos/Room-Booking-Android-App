@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
+import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
 import com.DistributedSystems.room_booking_android_app.insertion.InsertRoomActivity;
 
@@ -29,6 +30,12 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
                 presenter.onExit();
             }
         });
+
+        findViewById(R.id.dates).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onAddDates();
+            }
+        });
     }
 
     public void insertRoom() {
@@ -38,6 +45,11 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
 
     public void exit() {
         Intent intent = new Intent(ManagerConnectionActivity.this, HomepageActivity.class);
+        startActivity(intent);
+    }
+
+    public void addDates(){
+        Intent intent = new Intent(ManagerConnectionActivity.this, AddDatesActivity.class);
         startActivity(intent);
     }
 }

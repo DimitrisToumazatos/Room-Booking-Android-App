@@ -4,4 +4,6 @@ public interface ManagerConnectionView {
     void insertRoom();
 
     void exit();
+
+    void addDates();
 }

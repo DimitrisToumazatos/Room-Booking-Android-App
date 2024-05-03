@@ -13,4 +13,6 @@ public class ManagerConnectionPresenter {
 
     void onExit() {view.exit();}
 
+    void onAddDates() {view.addDates();}
+
 }

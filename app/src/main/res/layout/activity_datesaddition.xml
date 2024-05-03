@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary95"><![CDATA[
+    >
+
+    ]]>
+
+    <ListView
+        android:layout_width="361dp"
+        android:layout_height="403dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomId" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="242dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="36dp"
+        android:text="New dates emerged?Inform us.👷"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pickMessage"
+        android:layout_width="276dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="serif"
+        android:text="Pick the room you want to add dates."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message" />
+
+    <EditText
+        android:id="@+id/roomId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/pickMessage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pickMessage"
+        app:layout_constraintTop_toBottomOf="@+id/pickMessage" />
+</androidx.constraintlayout.widget.ConstraintLayout>
