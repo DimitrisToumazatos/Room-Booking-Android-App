@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
-import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionPresenter;
 
 public class CustomerConnectionActivity extends AppCompatActivity implements CustomerConnectionView {
 

@@ -60,12 +60,12 @@
         android:id="@+id/startingDate"
         android:layout_width="134dp"
         android:layout_height="28dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="serif"
         android:text="Starting date:"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/departureDate"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomNameText" />
 
@@ -85,8 +85,8 @@
         android:id="@+id/departureDate"
         android:layout_width="134dp"
         android:layout_height="28dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="serif"
         android:text="Departure date:"
         android:textStyle="bold"
@@ -109,11 +109,12 @@
         android:id="@+id/area"
         android:layout_width="134dp"
         android:layout_height="28dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="serif"
-        android:text="Area of the room::"
+        android:text="Area of the room:"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/persons"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startingDateText" />
 
@@ -133,8 +134,8 @@
         android:id="@+id/persons"
         android:layout_width="134dp"
         android:layout_height="28dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="serif"
         android:text="Room capacity:"
         android:textStyle="bold"
@@ -157,12 +158,11 @@
         android:id="@+id/ownerName"
         android:layout_width="155dp"
         android:layout_height="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="serif"
         android:text="Name of the owner:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/insertionText"
-        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="@+id/insertionText"
         app:layout_constraintTop_toBottomOf="@+id/insertionText" />
 
@@ -181,14 +181,38 @@
         android:id="@+id/insertionText"
         android:layout_width="387dp"
         android:layout_height="33dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="serif"
         android:text="       Provide the details,we will handle the rest🛠️ "
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image"
+        android:layout_width="311dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="Please place the image you want in the folder java/com/DistributedSystems/domain/images ana type the name of the photo below:"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areaText" />
+
+    <EditText
+        android:id="@+id/imageText"
+        android:layout_width="313dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="ImageExample.png"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="@+id/image"
+        app:layout_constraintStart_toStartOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
