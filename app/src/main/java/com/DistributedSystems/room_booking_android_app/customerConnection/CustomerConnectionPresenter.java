@@ -9,4 +9,6 @@ public class CustomerConnectionPresenter {
     }
 
     public void onExit() {view.exit();}
+
+    public void onRatingButton() {view.ratingButton();}
 }

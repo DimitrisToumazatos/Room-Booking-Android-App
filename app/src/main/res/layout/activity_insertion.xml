@@ -197,7 +197,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="40dp"
-        android:text="Please place the image you want in the folder java/com/DistributedSystems/domain/images ana type the name of the photo below:"
+        android:text="Please place the image you want in the folder java/com/DistributedSystems/domain/images and type the name of the photo below:"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

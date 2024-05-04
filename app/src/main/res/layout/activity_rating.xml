@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary95"
+    >
+
+    <ListView
+        android:layout_width="361dp"
+        android:layout_height="403dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomId" />
+
+    <EditText
+        android:id="@+id/ratingText"
+        android:layout_width="137dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="1-5"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/rating"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rating"
+        app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="134dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="serif"
+        android:text="Give your rating:"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/roomId"
+        app:layout_constraintTop_toBottomOf="@+id/roomId"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/roomId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/pickMessage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pickMessage"
+        app:layout_constraintTop_toBottomOf="@+id/pickMessage" />
+
+    <TextView
+        android:id="@+id/pickMessage"
+        android:layout_width="276dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="serif"
+        android:text="Pick the room you want to rate:"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="321dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="serif"
+        android:text="Rate a room,your feedback is important.⭐"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
