@@ -56,7 +56,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/reservations"
+        android:id="@+id/reservations_button"
         android:layout_width="201dp"
         android:layout_height="70dp"
         android:layout_marginTop="48dp"
@@ -73,9 +73,9 @@
         android:layout_height="70dp"
         android:layout_marginTop="48dp"
         android:text="Get reservation count per area in a specific time span"
-        app:layout_constraintEnd_toEndOf="@+id/reservations"
+        app:layout_constraintEnd_toEndOf="@+id/reservations_button"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/reservations"
-        app:layout_constraintTop_toBottomOf="@+id/reservations"
+        app:layout_constraintStart_toStartOf="@+id/reservations_button"
+        app:layout_constraintTop_toBottomOf="@+id/reservations_button"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

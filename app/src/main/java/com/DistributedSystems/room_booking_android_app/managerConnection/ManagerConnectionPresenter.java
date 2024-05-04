@@ -15,4 +15,6 @@ public class ManagerConnectionPresenter {
 
     void onAddDates() {view.addDates();}
 
+    void onGetManagersReservations() {view.getManagersReservations();}
+
 }

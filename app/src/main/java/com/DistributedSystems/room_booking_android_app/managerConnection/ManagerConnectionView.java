@@ -6,4 +6,6 @@ public interface ManagerConnectionView {
     void exit();
 
     void addDates();
+
+    void getManagersReservations();
 }
