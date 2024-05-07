@@ -8,4 +8,6 @@ public interface ManagerConnectionView {
     void addDates();
 
     void getManagersReservations();
+
+    void getReservationsPerArea();
 }

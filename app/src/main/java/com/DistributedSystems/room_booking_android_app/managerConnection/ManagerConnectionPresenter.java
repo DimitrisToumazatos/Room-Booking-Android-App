@@ -17,4 +17,6 @@ public class ManagerConnectionPresenter {
 
     void onGetManagersReservations() {view.getManagersReservations();}
 
+    void onGetReservationsPerArea () {view.getReservationsPerArea();}
+
 }

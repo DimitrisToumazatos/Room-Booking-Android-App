@@ -11,6 +11,7 @@ import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
 import com.DistributedSystems.room_booking_android_app.insertion.InsertRoomActivity;
+import com.DistributedSystems.room_booking_android_app.reservationsPerArea.ReservationsPerAreaActivity;
 
 public class ManagerConnectionActivity extends AppCompatActivity implements ManagerConnectionView {
 
@@ -43,6 +44,13 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
                 presenter.onGetManagersReservations();
             }
         });
+
+        findViewById(R.id.areaReservations).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onGetReservationsPerArea();
+            }
+        });
+
     }
 
     public void insertRoom() {
@@ -62,6 +70,11 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
 
     public void getManagersReservations(){
         Intent intent = new Intent(ManagerConnectionActivity.this, ManagerReservationsActivity.class);
+        startActivity(intent);
+    }
+
+    public void getReservationsPerArea(){
+        Intent intent = new Intent(ManagerConnectionActivity.this, ReservationsPerAreaActivity.class);
         startActivity(intent);
     }
 }

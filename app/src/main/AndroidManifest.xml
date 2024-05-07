@@ -16,6 +16,9 @@
             android:name=".rating.RateARoomActivity"
             android:exported="false"/>
         <activity
+            android:name=".reservationsPerArea.ReservationsPerAreaActivity"
+            android:exported="false"/>
+        <activity
             android:name=".managerReservations.ManagerReservationsActivity"
             android:exported="false"/>
         <activity
