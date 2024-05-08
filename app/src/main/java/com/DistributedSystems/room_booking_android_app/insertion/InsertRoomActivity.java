@@ -20,6 +20,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
     EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText, roomImageText;
     String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity, roomImage;
     Button insertButton;
+    Boolean insertButtonEnabled;
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -33,7 +34,15 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
             roomCapacity = ViewUtils.getTextFromEditTextElement(roomCapacityText);
             roomImage = ViewUtils.getTextFromEditTextElement(roomImageText);
             roomStDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
-            roomDepDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
+            roomDepDate = ViewUtils.getTextFromEditTextElement(roomDepDateText);
+
+            if (roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) {
+                insertButton.setAlpha(0.5f);
+                insertButtonEnabled = false;
+            } else {
+                insertButton.setAlpha(1.0f);
+                insertButtonEnabled = true;
+            }
         }
 
         @Override
@@ -47,8 +56,6 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
         final InsertRoomPresenter presenter = new InsertRoomPresenter(this);
 
-        insertButton = findViewById(R.id.insert_button);
-
         roomNameText = findViewById(R.id.roomNameText);
         roomPriceText = findViewById(R.id.priceText);
         roomAreaText = findViewById(R.id.areaText);
@@ -56,6 +63,10 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomImageText = findViewById(R.id.imageText);
         roomStDateText = findViewById(R.id.startingDateText);
         roomDepDateText = findViewById(R.id.departureDateText);
+
+        insertButton = findViewById(R.id.insert_button);
+        insertButton.setAlpha(0.5f);
+        insertButtonEnabled = false;
 
         roomNameText.addTextChangedListener(inputFieldsWatcher);
         roomPriceText.addTextChangedListener(inputFieldsWatcher);
@@ -67,7 +78,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
         insertButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                presenter.onInsertRoom(roomName, roomArea, roomImage, roomPrice, roomCapacity, roomStDate, roomDepDate);
+                presenter.onInsertRoom(roomName, roomArea, roomImage, roomPrice, roomCapacity, roomStDate, roomDepDate, insertButtonEnabled);
             }
         });
     }
