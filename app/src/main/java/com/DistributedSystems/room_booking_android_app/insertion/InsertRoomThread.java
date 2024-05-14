@@ -16,7 +16,7 @@ public class InsertRoomThread extends Thread {
     @Override
     public void run() {
         try {
-            actionsForClientSocket = new Socket("--insert your address--", 8000);
+            actionsForClientSocket = new Socket("192.168.1.5", 8000);
             actionsForClientOutputStream = new ObjectOutputStream(actionsForClientSocket.getOutputStream());
 
             actionsForClientOutputStream.writeObject("manager");

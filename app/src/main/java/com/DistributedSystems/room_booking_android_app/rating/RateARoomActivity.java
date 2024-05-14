@@ -1,5 +1,7 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
+import static java.lang.Thread.sleep;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +19,19 @@ import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
+import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RateARoomActivity extends AppCompatActivity implements RateARoomView {
 
     EditText roomIdText, ratingText;
-
     String roomId, rating;
-
     Button rateRoomButton;
-
     Boolean rateRoomButtonEnabled;
+    ListView roomListView;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,6 +61,10 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         setContentView(R.layout.activity_rating);
 
         final RateARoomPresenter presenter = new RateARoomPresenter(this);
+        List<String> roomNames = new ArrayList<>();
+        List<String> roomIds = new ArrayList<>();
+
+        new RateRoomSearchThread(roomNames, roomIds).start();
 
         roomIdText = findViewById(R.id.roomIdText);
         ratingText = findViewById(R.id.ratingText);
@@ -66,6 +75,10 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
 
         roomIdText.addTextChangedListener(inputFieldsWatcher);
         ratingText.addTextChangedListener(inputFieldsWatcher);
+
+        roomListView = (ListView) findViewById(R.id.rateListView);
+        RoomAdapter adapter = new RoomAdapter(getApplicationContext(), roomNames, roomIds);
+        roomListView.setAdapter(adapter);
 
         rateRoomButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
