@@ -34,7 +34,7 @@ public class RateRoomSearchThread extends Thread {
 
             actionsForClientOutputStream.writeObject("client");
             actionsForClientOutputStream.flush();
-            actionsForClientOutputStream.writeInt(3);
+            actionsForClientOutputStream.writeInt(2);
             actionsForClientOutputStream.flush();
             actionsForClientOutputStream.writeObject("default search");
             actionsForClientOutputStream.flush();

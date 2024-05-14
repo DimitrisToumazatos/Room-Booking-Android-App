@@ -15,6 +15,9 @@
         android:theme="@style/Theme.RoomBookingAndroidApp"
         tools:targetApi="31">
         <activity
+            android:name=".searchRoom.SearchRoomActivity"
+            android:exported="false"/>
+        <activity
             android:name=".rating.RateARoomActivity"
             android:exported="false"/>
         <activity

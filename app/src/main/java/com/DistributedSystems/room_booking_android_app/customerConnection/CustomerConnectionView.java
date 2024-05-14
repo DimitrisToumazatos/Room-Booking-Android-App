@@ -5,4 +5,6 @@ public interface CustomerConnectionView {
     void exit();
 
     void ratingButton();
+
+    void searchButton();
 }
