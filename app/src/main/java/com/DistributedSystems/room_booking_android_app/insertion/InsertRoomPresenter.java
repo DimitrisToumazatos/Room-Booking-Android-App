@@ -1,16 +1,21 @@
 package com.DistributedSystems.room_booking_android_app.insertion;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InsertRoomPresenter {
     private final InsertRoomView view;
-
     public InsertRoomPresenter(InsertRoomView view) {
         this.view = view;
     }
 
-    void onInsertRoom(String roomName, String roomArea, String roomImage, String roomPrice, String roomCapacity, String roomStDate, String roomDepDate, Boolean insertButtonEnabled) {
+    void onInsertRoom(String roomName, String roomArea, String roomImage, String roomPrice, String roomCapacity, String roomStDate, String roomDepDate, String ownerName, Boolean insertButtonEnabled) throws IOException, JSONException {
         String ERROR_INVALID_PRICE_MSG = "The price you gave is equal or below zero.";
         String ERROR_INVALID_CAPACITY_MSG = "Please give a positive number of persons!";
         String ERROR_DATE_PASSED_MSG = "The date you chose has passed!";
@@ -43,6 +48,27 @@ public class InsertRoomPresenter {
             view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
         }
         else {
+            List<List<String>> datesList = new ArrayList<>();
+            List<String> tempDatesList = new ArrayList<>();
+
+            tempDatesList.add(localRoomStDate.toString());
+            tempDatesList.add(localRoomDepDate.toString());
+
+            datesList.add(tempDatesList);
+
+            JSONObject json = new JSONObject();
+            json.put("owner", ownerName);
+            json.put("price", roomPrice);
+            json.put("availableDates", datesList);
+            json.put("roomName", roomName);
+            json.put("noOfPersons", localRoomCapacity);
+            json.put("area", roomArea);
+            json.put("stars", 0);
+            json.put("noOfReviews", 0);
+            json.put("roomImage", roomImage);
+
+            new InsertRoomThread(json.toString(), ownerName).start();
+
             view.successfulInsertion();
         }
     }

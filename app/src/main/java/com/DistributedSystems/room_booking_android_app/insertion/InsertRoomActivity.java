@@ -15,10 +15,14 @@ import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class InsertRoomActivity extends AppCompatActivity implements InsertRoomView {
 
-    EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText, roomImageText;
-    String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity, roomImage;
+    EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText, roomImageText, ownerNameText;
+    String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity, roomImage, ownerName;
     Button insertButton;
     Boolean insertButtonEnabled;
     TextWatcher inputFieldsWatcher = new TextWatcher() {
@@ -35,8 +39,9 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
             roomImage = ViewUtils.getTextFromEditTextElement(roomImageText);
             roomStDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
             roomDepDate = ViewUtils.getTextFromEditTextElement(roomDepDateText);
+            ownerName = ViewUtils.getTextFromEditTextElement(ownerNameText);
 
-            if (roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) {
+            if (roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty() || ownerName.isEmpty()) {
                 insertButton.setAlpha(0.5f);
                 insertButtonEnabled = false;
             } else {
@@ -63,6 +68,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomImageText = findViewById(R.id.imageText);
         roomStDateText = findViewById(R.id.startingDateText);
         roomDepDateText = findViewById(R.id.departureDateText);
+        ownerNameText = findViewById(R.id.ownerNameText);
 
         insertButton = findViewById(R.id.insert_button);
         insertButton.setAlpha(0.5f);
@@ -75,10 +81,15 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomImageText.addTextChangedListener(inputFieldsWatcher);
         roomStDateText.addTextChangedListener(inputFieldsWatcher);
         roomDepDateText.addTextChangedListener(inputFieldsWatcher);
+        ownerNameText.addTextChangedListener(inputFieldsWatcher);
 
         insertButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                presenter.onInsertRoom(roomName, roomArea, roomImage, roomPrice, roomCapacity, roomStDate, roomDepDate, insertButtonEnabled);
+                try {
+                    presenter.onInsertRoom(roomName, roomArea, roomImage, roomPrice, roomCapacity, roomStDate, roomDepDate, ownerName, insertButtonEnabled);
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
