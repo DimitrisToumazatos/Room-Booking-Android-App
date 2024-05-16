@@ -16,14 +16,20 @@ public class InsertRoomThread extends Thread {
     @Override
     public void run() {
         try {
-            actionsForClientSocket = new Socket("192.168.1.5", 8000);
+            actionsForClientSocket = new Socket("192.168.1.10", 8000);
             actionsForClientOutputStream = new ObjectOutputStream(actionsForClientSocket.getOutputStream());
 
             actionsForClientOutputStream.writeObject("manager");
+            actionsForClientOutputStream.flush();
             actionsForClientOutputStream.writeObject(owner);
+            actionsForClientOutputStream.flush();
             actionsForClientOutputStream.writeInt(1);
+            actionsForClientOutputStream.flush();
 
             actionsForClientOutputStream.writeObject(this.json);
+            actionsForClientOutputStream.flush();
+
+            actionsForClientOutputStream.writeInt(0);
             actionsForClientOutputStream.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
