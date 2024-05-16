@@ -15,11 +15,15 @@ public class RoomAdapter extends BaseAdapter {
     Context context;
     List<String> roomNames, roomIds;
     LayoutInflater inflater;
-    public RoomAdapter(Context ctx, List<String> roomNames, List<String> roomIds) {
-        this.context = ctx;
+    public RoomAdapter(LayoutInflater inflater, List<String> roomNames, List<String> roomIds) {
+        this.inflater = inflater;
         this.roomIds = roomIds;
         this.roomNames = roomNames;
-        this.inflater = LayoutInflater.from(ctx);
+    }
+
+    public void setData(List<String> roomNames, List<String> roomIds) {
+        this.roomNames = roomNames;
+        this.roomIds = roomIds;
     }
     @Override
     public int getCount() {
@@ -38,7 +42,10 @@ public class RoomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.activity_item_list, null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.activity_item_list, parent, false);
+        }
+
         TextView nameTextView = (TextView) convertView.findViewById(R.id.roomName);
         TextView idTextView = (TextView) convertView.findViewById(R.id.roomId);
         nameTextView.setText(roomNames.get(position));

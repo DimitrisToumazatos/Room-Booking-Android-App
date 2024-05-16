@@ -1,12 +1,12 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
-import static java.lang.Thread.sleep;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,11 +16,13 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
+import com.DistributedSystems.room_booking_android_app.domain.Room;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
@@ -37,6 +39,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     Boolean rateRoomButtonEnabled;
     ListView roomListView;
     TextView myText;
+    RoomAdapter adapter;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -60,6 +63,20 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         }
     };
 
+    public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+
+            List<String> roomNamesMessage = message.getData().getStringArrayList("roomNames");
+            List<String> roomIdsMessage = message.getData().getStringArrayList("roomIds");
+
+            adapter.setData(roomNamesMessage, roomIdsMessage);
+            //adapter.notifyDataSetChanged();
+
+            roomListView.setAdapter(adapter);
+            return false;
+        }
+    });
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +87,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         List<String> roomNames = new ArrayList<>();
         List<String> roomIds = new ArrayList<>();
 
-        new RateRoomSearchThread(roomNames, roomIds).start();
+        new RateRoomSearchThread(myHandler).start();
 
         roomIdText = findViewById(R.id.roomIdText);
         ratingText = findViewById(R.id.ratingText);
@@ -83,7 +100,8 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         ratingText.addTextChangedListener(inputFieldsWatcher);
 
         roomListView = (ListView) findViewById(R.id.rateListView);
-        RoomAdapter adapter = new RoomAdapter(getApplicationContext(), roomNames, roomIds);
+
+        adapter = new RoomAdapter(getLayoutInflater(), roomNames, roomIds);
         roomListView.setAdapter(adapter);
 
         rateRoomButton.setOnClickListener(new View.OnClickListener() {

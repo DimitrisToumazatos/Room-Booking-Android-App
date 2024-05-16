@@ -1,69 +1,55 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 import com.DistributedSystems.room_booking_android_app.domain.Room;
+import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
+import android.os.Handler;
 
 
 public class RateRoomSearchThread extends Thread {
 
-    Handler myHandler;
-    List<String> roomNames, roomIds;
-    Socket actionsForClientSocket;
-    ObjectOutputStream actionsForClientOutputStream;
-    ObjectInputStream actionsForClientInputStream;
-    public RateRoomSearchThread(List<String> roomNames, List<String> roomIds) {
-        this.roomNames = roomNames;
-        this.roomIds = roomIds;
+    Handler handler;
+    public RateRoomSearchThread(Handler handler) {
+        this.handler = handler;
     }
 
     @Override
     public void run() {
         try {
+            Dao.getOut().writeInt(3);
+            Dao.getOut().flush();
+            Dao.getOut().writeObject("default search");
+            Dao.getOut().flush();
 
-            actionsForClientSocket = new Socket("192.168.1.5", 8000);
+            List<Room> rooms = (List<Room>) Dao.getIn().readObject();
 
-            actionsForClientOutputStream = new ObjectOutputStream(actionsForClientSocket.getOutputStream());
-            actionsForClientInputStream = new ObjectInputStream(actionsForClientSocket.getInputStream());
-
-            actionsForClientOutputStream.writeObject("client");
-            actionsForClientOutputStream.flush();
-            actionsForClientOutputStream.writeInt(2);
-            actionsForClientOutputStream.flush();
-            actionsForClientOutputStream.writeObject("default search");
-            actionsForClientOutputStream.flush();
-
-            List<Room> rooms = (List<Room>) actionsForClientInputStream.readObject();
-
-            Log.i("room", rooms.get(0).toString());
-
-            actionsForClientOutputStream.writeInt(0);
-            actionsForClientOutputStream.flush();
+            ArrayList<String> roomNames = new ArrayList<>();
+            ArrayList<String> roomIds = new ArrayList<>();
 
             for (Room room:rooms){
                 roomNames.add((String) room.get("roomName"));
                 roomIds.add(room.getId().toString());
             }
 
+            Message msg = new Message();
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("roomNames", roomNames);
+            bundle.putStringArrayList("roomIds", roomIds);
+            msg.setData(bundle);
+            handler.sendMessage(msg);
+
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                actionsForClientOutputStream.close();
-                actionsForClientInputStream.close();
-                actionsForClientSocket.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
         }
-
     }
 }
