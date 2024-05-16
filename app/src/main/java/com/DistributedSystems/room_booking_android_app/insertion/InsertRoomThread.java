@@ -1,46 +1,28 @@
 package com.DistributedSystems.room_booking_android_app.insertion;
 
+import com.DistributedSystems.room_booking_android_app.utils.Dao;
+
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 public class InsertRoomThread extends Thread {
-    Socket actionsForClientSocket;
-    ObjectOutputStream actionsForClientOutputStream;
-    String json, owner;
+    String json;
 
-    public InsertRoomThread(String json, String owner) {
+    public InsertRoomThread(String json) {
         this.json = json;
-        this.owner = owner;
     }
     @Override
     public void run() {
         try {
-            actionsForClientSocket = new Socket("192.168.1.10", 8000);
-            actionsForClientOutputStream = new ObjectOutputStream(actionsForClientSocket.getOutputStream());
+            Dao.getOut().writeInt(1);
+            Dao.getOut().flush();
 
-            actionsForClientOutputStream.writeObject("manager");
-            actionsForClientOutputStream.flush();
-            actionsForClientOutputStream.writeObject(owner);
-            actionsForClientOutputStream.flush();
-            actionsForClientOutputStream.writeInt(1);
-            actionsForClientOutputStream.flush();
+            Dao.getOut().writeObject(this.json);
+            Dao.getOut().flush();
 
-            actionsForClientOutputStream.writeObject(this.json);
-            actionsForClientOutputStream.flush();
-
-            actionsForClientOutputStream.writeInt(0);
-            actionsForClientOutputStream.flush();
+//            Dao.getOut().writeInt(0);
+//            Dao.getOut().flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                actionsForClientOutputStream.close();
-                actionsForClientSocket.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
         }
     }
 }

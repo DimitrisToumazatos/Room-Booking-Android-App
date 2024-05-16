@@ -1,5 +1,11 @@
 package com.DistributedSystems.room_booking_android_app.insertion;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import com.DistributedSystems.room_booking_android_app.utils.Dao;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +21,8 @@ public class InsertRoomPresenter {
         this.view = view;
     }
 
-    void onInsertRoom(String roomName, String roomArea, String roomImage, String roomPrice, String roomCapacity, String roomStDate, String roomDepDate, String ownerName, Boolean insertButtonEnabled) throws IOException, JSONException {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    void onInsertRoom(String roomName, String roomArea, String roomImage, String roomPrice, String roomCapacity, String roomStDate, String roomDepDate, Boolean insertButtonEnabled) throws IOException, JSONException {
         String ERROR_INVALID_PRICE_MSG = "The price you gave is equal or below zero.";
         String ERROR_INVALID_CAPACITY_MSG = "Please give a positive number of persons!";
         String ERROR_DATE_PASSED_MSG = "The date you chose has passed!";
@@ -57,7 +64,7 @@ public class InsertRoomPresenter {
             datesList.add(tempDatesList);
 
             JSONObject json = new JSONObject();
-            json.put("owner", ownerName);
+            json.put("owner", Dao.getManagerName());
             json.put("price", roomPrice);
             json.put("availableDates", datesList);
             json.put("roomName", roomName);
@@ -67,7 +74,7 @@ public class InsertRoomPresenter {
             json.put("noOfReviews", 0);
             json.put("roomImage", roomImage);
 
-            new InsertRoomThread(json.toString(), ownerName).start();
+            new InsertRoomThread(json.toString()).start();
 
             view.successfulInsertion();
         }

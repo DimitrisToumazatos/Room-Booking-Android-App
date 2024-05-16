@@ -1,4 +1,6 @@
-package com.DistributedSystems.room_booking_android_app.domain.domain_classes;
+package com.DistributedSystems.room_booking_android_app.domain;
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,6 +17,7 @@ public class Reservation implements Serializable {
         this.roodId = roodId;
     }
 
+    @NonNull
     public String toString() {
         return "Room Id: " + roodId + "\nName Of Customer: " + nameOfCustomer + "\nArrival: " + startDate + "\nDeparture: " + endDate;
     }

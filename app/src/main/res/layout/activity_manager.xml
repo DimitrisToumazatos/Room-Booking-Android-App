@@ -21,26 +21,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/exitMaster"
-        android:layout_width="201dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="48dp"
-        android:text="Exit"
-        app:layout_constraintEnd_toEndOf="@+id/helpManager"
-        app:layout_constraintStart_toStartOf="@+id/helpManager"
-        app:layout_constraintTop_toBottomOf="@+id/helpManager"
-        tools:ignore="MissingConstraints" />
-
-    <Button
         android:id="@+id/insertion_button"
         android:layout_width="201dp"
         android:layout_height="70dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:text="Insert a room"
-        app:layout_constraintEnd_toEndOf="@+id/exitMaster"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/exitMaster"
-        app:layout_constraintTop_toBottomOf="@+id/exitMaster"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpManager"
         tools:ignore="MissingConstraints" />
 
     <Button

@@ -5,4 +5,6 @@ public interface HomepageView {
     void managerConnection();
 
     void customerConnection();
+
+    void showToast(String msg);
 }

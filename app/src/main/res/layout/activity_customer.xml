@@ -21,25 +21,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/exitCustomer"
-        android:layout_width="201dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="48dp"
-        android:text="Exit"
-        app:layout_constraintEnd_toEndOf="@+id/helpCustomer"
-        app:layout_constraintStart_toStartOf="@+id/helpCustomer"
-        app:layout_constraintTop_toBottomOf="@+id/helpCustomer"
-        tools:ignore="MissingConstraints" />
-
-    <Button
         android:id="@+id/search"
         android:layout_width="201dp"
         android:layout_height="70dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="88dp"
         android:text="Search for a room"
-        app:layout_constraintEnd_toEndOf="@+id/exitCustomer"
-        app:layout_constraintStart_toStartOf="@+id/exitCustomer"
-        app:layout_constraintTop_toBottomOf="@+id/exitCustomer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpCustomer"
         tools:ignore="MissingConstraints" />
 
     <Button

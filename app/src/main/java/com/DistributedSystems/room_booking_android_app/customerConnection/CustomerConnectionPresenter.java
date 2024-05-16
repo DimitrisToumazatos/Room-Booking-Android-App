@@ -8,8 +8,6 @@ public class CustomerConnectionPresenter {
         this.view = view;
     }
 
-    public void onExit() {view.exit();}
-
     public void onRatingButton() {view.ratingButton();}
 
     public void onSearchButton() {view.searchButton();}

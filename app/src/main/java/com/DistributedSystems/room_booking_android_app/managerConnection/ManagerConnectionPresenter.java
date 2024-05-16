@@ -11,7 +11,6 @@ public class ManagerConnectionPresenter {
 
     void onInsertRoom() {view.insertRoom();}
 
-    void onExit() {view.exit();}
 
     void onAddDates() {view.addDates();}
 

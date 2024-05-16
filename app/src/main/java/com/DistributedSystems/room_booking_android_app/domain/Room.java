@@ -1,4 +1,9 @@
-package com.DistributedSystems.room_booking_android_app.domain.domain_classes;
+package com.DistributedSystems.room_booking_android_app.domain;
+
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -52,6 +57,7 @@ public class Room implements Serializable {
      * @param startDate starting date of the reservation
      * @param endDate final date of the reservation
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addReservation(String nameOfCustomer, LocalDate startDate, LocalDate endDate) {
         reservations.add(new Reservation( nameOfCustomer, getId().intValue(), startDate, endDate));
 
@@ -93,4 +99,3 @@ public class Room implements Serializable {
         json.put(field, value);
     }
 }
-
