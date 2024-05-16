@@ -5,11 +5,14 @@ import static java.lang.Thread.sleep;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class RateARoomActivity extends AppCompatActivity implements RateARoomView {
 
     EditText roomIdText, ratingText;
@@ -32,6 +36,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     Button rateRoomButton;
     Boolean rateRoomButtonEnabled;
     ListView roomListView;
+    TextView myText;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -54,6 +59,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         public void afterTextChanged(Editable s) {
         }
     };
+
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {

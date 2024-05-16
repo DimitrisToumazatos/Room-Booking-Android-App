@@ -1,5 +1,4 @@
 package com.DistributedSystems.room_booking_android_app.domain.domain_classes;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 

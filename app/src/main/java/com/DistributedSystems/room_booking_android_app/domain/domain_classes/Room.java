@@ -1,5 +1,4 @@
 package com.DistributedSystems.room_booking_android_app.domain.domain_classes;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -9,13 +8,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import com.DistributedSystems.room_booking_android_app.domain.domain_classes.Reservation;
 
-// the class is room is created to handle more efficiently the rooms given as Json
 public class Room implements Serializable {
     private final JSONObject json;
     private final List<Reservation> reservations = new ArrayList<>();
-     private static int currentId = 0;
+    private static int currentId = 0;
     static JSONParser parser = new JSONParser();
 
     public Room(JSONObject json){
@@ -41,7 +38,7 @@ public class Room implements Serializable {
 
     public String toString(){
         return "Id: " + get("id") + "\nName: " + get("roomName") + "\nPrice per night: " + get("price") + "\nNumber of people: " + get("noOfPersons") +
-                 "\nArea: " + get("area") + "\nStars: " + get("stars") + "\nAvailable Dates: " + get("availableDates") + "\n";
+                "\nArea: " + get("area") + "\nStars: " + get("stars") + "\nAvailable Dates: " + get("availableDates") + "\n";
     }
 
     public List<Reservation> getReservations() {
@@ -96,3 +93,4 @@ public class Room implements Serializable {
         json.put(field, value);
     }
 }
+
