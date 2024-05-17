@@ -36,7 +36,7 @@ public class Dao {
     }
 
     public static void initializeConnections() throws IOException {
-        socket = new Socket("192.168.1.10", 8000);
+        socket = new Socket("192.168.1.11", 8000);
         in = new ObjectInputStream(socket.getInputStream());
         out = new ObjectOutputStream(socket.getOutputStream());
     }

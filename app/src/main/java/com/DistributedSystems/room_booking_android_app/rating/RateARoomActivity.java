@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
+import com.DistributedSystems.room_booking_android_app.domain.Room;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
@@ -40,6 +41,8 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     TextView myText;
     RoomAdapter adapter;
     ArrayList<String> roomStrings = new ArrayList<>();
+
+    ArrayList<Room> rooms;
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -65,6 +68,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
+            rooms = message.getData().getParcelableArrayList("Rooms");
             adapter.notifyDataSetChanged();
             return false;
         }
@@ -96,7 +100,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
 
         rateRoomButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled);
+                presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms);
                 SendRatingThread t2 = new SendRatingThread(myHandler, roomId, rating);
                 t2.start();
             }
