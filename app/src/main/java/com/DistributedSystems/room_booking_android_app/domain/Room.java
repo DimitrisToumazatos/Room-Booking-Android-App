@@ -37,11 +37,11 @@ public class Room implements Serializable {
     public Number getId(){
         return (Number) json.get("id");
     }
-    public String toJSONString() {
+    public String toJSON(){
         return json.toString();
     }
 
-    public String toString() {
+    public String toString(){
         return "Id: " + get("id") + "\nName: " + get("roomName") + "\nPrice per night: " + get("price") + "\nNumber of people: " + get("noOfPersons") +
                 "\nArea: " + get("area") + "\nStars: " + get("stars") + "\nAvailable Dates: " + get("availableDates") + "\n";
     }

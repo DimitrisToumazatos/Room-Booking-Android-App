@@ -1,6 +1,5 @@
 package com.DistributedSystems.room_booking_android_app.utils;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,7 @@ public class RoomAdapter extends BaseAdapter {
         try {
             JSONObject json = (JSONObject) parser.parse(roomStrings.get(position));
             nameTextView.setText((String) json.get("roomName"));
-            idTextView.setText((String) json.get("id"));
+            idTextView.setText((Long.toString((Long) json.get("id"))));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
