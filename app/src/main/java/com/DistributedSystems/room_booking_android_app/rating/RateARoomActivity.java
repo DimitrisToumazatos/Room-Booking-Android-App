@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.domain.Room;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
@@ -82,8 +81,8 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
         roomListView.setAdapter(adapter);
 
-        RateRoomSearchThread t = new RateRoomSearchThread(myHandler, roomStrings);
-        t.start();
+        RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings);
+        t1.start();
 
         roomIdText = findViewById(R.id.roomIdText);
         ratingText = findViewById(R.id.ratingText);
@@ -98,6 +97,8 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         rateRoomButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled);
+                SendRatingThread t2 = new SendRatingThread(myHandler, roomId, rating);
+                t2.start();
             }
         });
     }
