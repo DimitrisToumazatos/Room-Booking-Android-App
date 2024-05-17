@@ -15,12 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import android.os.Handler;
 
+import org.json.simple.JSONObject;
+
 
 public class RateRoomSearchThread extends Thread {
 
     Handler handler;
-    public RateRoomSearchThread(Handler handler) {
+    ArrayList<String> roomStrings;
+    public RateRoomSearchThread(Handler handler, ArrayList<String> roomStrings) {
         this.handler = handler;
+        this.roomStrings = roomStrings;
     }
 
     @Override
@@ -33,18 +37,21 @@ public class RateRoomSearchThread extends Thread {
 
             List<Room> rooms = (List<Room>) Dao.getIn().readObject();
 
-            ArrayList<String> roomNames = new ArrayList<>();
-            ArrayList<String> roomIds = new ArrayList<>();
+//            ArrayList<String> roomNames = new ArrayList<>();
+//            ArrayList<String> roomIds = new ArrayList<>();
 
-            for (Room room:rooms){
-                roomNames.add((String) room.get("roomName"));
-                roomIds.add(room.getId().toString());
+//            for (Room room:rooms){
+//                roomNames.add((String) room.get("roomName"));
+//                roomIds.add(room.getId().toString());
+//
+            roomStrings.clear();
+            for (Room room : rooms) {
+                roomStrings.add(room.toJSONString());
             }
 
             Message msg = new Message();
             Bundle bundle = new Bundle();
-            bundle.putStringArrayList("roomNames", roomNames);
-            bundle.putStringArrayList("roomIds", roomIds);
+            bundle.putStringArrayList("rooms", roomStrings);
             msg.setData(bundle);
             handler.sendMessage(msg);
 

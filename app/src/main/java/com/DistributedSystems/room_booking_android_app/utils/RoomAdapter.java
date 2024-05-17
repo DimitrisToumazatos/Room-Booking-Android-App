@@ -9,25 +9,24 @@ import android.widget.TextView;
 
 import com.DistributedSystems.room_booking_android_app.R;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.util.List;
 
 public class RoomAdapter extends BaseAdapter {
-    Context context;
-    List<String> roomNames, roomIds;
+    List<String> roomStrings;
     LayoutInflater inflater;
-    public RoomAdapter(LayoutInflater inflater, List<String> roomNames, List<String> roomIds) {
+    static JSONParser parser = new JSONParser();
+    public RoomAdapter(LayoutInflater inflater, List<String> roomStrings) {
         this.inflater = inflater;
-        this.roomIds = roomIds;
-        this.roomNames = roomNames;
+        this.roomStrings = roomStrings;
     }
 
-    public void setData(List<String> roomNames, List<String> roomIds) {
-        this.roomNames = roomNames;
-        this.roomIds = roomIds;
-    }
     @Override
     public int getCount() {
-        return roomIds.size();
+        return roomStrings.size();
     }
 
     @Override
@@ -48,8 +47,14 @@ public class RoomAdapter extends BaseAdapter {
 
         TextView nameTextView = (TextView) convertView.findViewById(R.id.roomName);
         TextView idTextView = (TextView) convertView.findViewById(R.id.roomId);
-        nameTextView.setText(roomNames.get(position));
-        idTextView.setText(roomIds.get(position));
+
+        try {
+            JSONObject json = (JSONObject) parser.parse(roomStrings.get(position));
+            nameTextView.setText((String) json.get("roomName"));
+            idTextView.setText((String) json.get("id"));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         return convertView;
     }
 }
