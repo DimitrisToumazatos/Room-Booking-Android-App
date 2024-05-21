@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.DistributedSystems.room_booking_android_app.domain.Room;
+import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import org.json.simple.parser.ParseException;
@@ -26,7 +26,6 @@ public class ManagerReservationsThread extends Thread{
     public void run() {
 
         try {
-            Log.d("Message", String.valueOf(1));
             Dao.getOut().writeInt(33);
             Dao.getOut().flush();
 

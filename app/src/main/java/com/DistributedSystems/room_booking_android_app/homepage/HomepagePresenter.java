@@ -15,7 +15,7 @@ public class HomepagePresenter {
 
 
     void onManagerConnection(String managerName, boolean insertButtonEnabled) {
-        String ERROR_NO_MANAGER_NAME = "Please give a manger name.";
+        String ERROR_NO_MANAGER_NAME = "Please give a manager name.";
 
         if (!insertButtonEnabled) {
             view.showToast(ERROR_NO_MANAGER_NAME);
