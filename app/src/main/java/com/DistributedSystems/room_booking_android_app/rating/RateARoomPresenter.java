@@ -19,6 +19,7 @@ public class RateARoomPresenter {
         String ERROR_EMPTY_FIELD_MSG = "Please fill all the given fields";
         String ERROR_INVALID_ROOM_ID = "Please give a room id among the existing ones";
         String ERROR_BOTH_TEXTS_WRONG = "Please give a correct room id and rating";
+        String SUCCESSFUL_RATING_COMMIT = "Your rating has been committed successfully";
 
         if (!rateRoomButtonEnabled) {
             view.showToast(ERROR_EMPTY_FIELD_MSG);
@@ -45,6 +46,7 @@ public class RateARoomPresenter {
             view.showToast(ERROR_INVALID_RATING_MSG);
         }
         else{
+            view.showToast(SUCCESSFUL_RATING_COMMIT);
             view.rateRoom();
         }
     }

@@ -7,4 +7,6 @@ public interface HomepageView {
     void customerConnection();
 
     void showToast(String msg);
+
+    void exit();
 }

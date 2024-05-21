@@ -1,10 +1,7 @@
 package com.DistributedSystems.room_booking_android_app.domain;
 
 import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.json.simple.JSONObject;
@@ -17,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room implements Serializable, Parcelable {
+public class Room implements Serializable{
     private final JSONObject json;
     private final List<Reservation> reservations = new ArrayList<>();
     private static int currentId = 0;
@@ -100,15 +97,5 @@ public class Room implements Serializable, Parcelable {
 
     public void put(String field, Object value) {
         json.put(field, value);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-
     }
 }

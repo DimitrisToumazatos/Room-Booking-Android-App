@@ -39,7 +39,7 @@ public class RateRoomSearchThread extends Thread {
 
             Message msg = new Message();
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("Rooms", roomObjects);
+            bundle.putSerializable("Rooms", roomObjects);
             msg.setData(bundle);
             handler.sendMessage(msg);
 

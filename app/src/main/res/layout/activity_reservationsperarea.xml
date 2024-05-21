@@ -2,21 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_secondary95"
-    >
+    android:background="@color/material_dynamic_secondary95">
 
-
-    <ListView
-        android:id="@+id/reservationPerAreaList"
-        android:layout_width="358dp"
-        android:layout_height="485dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/reservationPerAreaListText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/reservationPerAreaListText"
-        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
 
     <TextView
         android:id="@+id/reservationPerAreaListText"
@@ -35,10 +25,20 @@
         android:id="@+id/reservationPerAreaExitButton"
         android:layout_width="202dp"
         android:layout_height="63dp"
-        android:layout_marginTop="28dp"
         android:text="Exit"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaList" />
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+
+    <ImageView
+        android:id="@+id/imageViewEx"
+        android:layout_width="196dp"
+        android:layout_height="146dp"
+        app:layout_constraintBottom_toTopOf="@+id/reservationPerAreaExitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText"
+        app:srcCompat="@mipmap/ic_launcher" />
 </androidx.constraintlayout.widget.ConstraintLayout>

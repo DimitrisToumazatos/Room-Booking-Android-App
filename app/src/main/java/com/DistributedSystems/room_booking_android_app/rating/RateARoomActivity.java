@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,15 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
-import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.domain.Room;
-import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class RateARoomActivity extends AppCompatActivity implements RateARoomView {
@@ -68,7 +65,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            rooms = message.getData().getParcelableArrayList("Rooms");
+            rooms = (ArrayList<Room>) message.getData().getSerializable("Rooms");
             adapter.notifyDataSetChanged();
             return false;
         }
@@ -81,7 +78,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
 
         final RateARoomPresenter presenter = new RateARoomPresenter(this);
 
-        roomListView = (ListView) findViewById(R.id.rateListView);
+        roomListView = findViewById(R.id.rateListView);
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
         roomListView.setAdapter(adapter);
 
@@ -98,12 +95,10 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         roomIdText.addTextChangedListener(inputFieldsWatcher);
         ratingText.addTextChangedListener(inputFieldsWatcher);
 
-        rateRoomButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms);
-                SendRatingThread t2 = new SendRatingThread(myHandler, roomId, rating);
-                t2.start();
-            }
+        rateRoomButton.setOnClickListener(v -> {
+            presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms);
+            SendRatingThread t2 = new SendRatingThread(myHandler, roomId, rating);
+            t2.start();
         });
     }
 

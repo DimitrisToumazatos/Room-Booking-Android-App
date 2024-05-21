@@ -1,6 +1,7 @@
 package com.DistributedSystems.room_booking_android_app.utils;
 
 import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -14,6 +15,7 @@ public class Dao {
     public static ObjectInputStream getIn() {
         return in;
     }
+
 
     public static String getManagerName() {
         return managerName;
@@ -36,7 +38,7 @@ public class Dao {
     }
 
     public static void initializeConnections() throws IOException {
-        socket = new Socket("192.168.1.11", 8000);
+        socket = new Socket("192.168.1.8", 8000);
         in = new ObjectInputStream(socket.getInputStream());
         out = new ObjectOutputStream(socket.getOutputStream());
     }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,10 +16,12 @@ import com.DistributedSystems.room_booking_android_app.customerConnection.Custom
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
+import java.io.IOException;
+
 public class HomepageActivity extends AppCompatActivity implements HomepageView {
     String managerName;
     EditText managerNameText;
-    Button managerButton;
+    Button managerButton, clientButton, exitButton;
     boolean managerButtonEnabled;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
@@ -58,20 +59,22 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
         managerNameText = findViewById(R.id.managerNameText);
 
         managerButton = findViewById(R.id.home_manager_button);
+        clientButton = findViewById(R.id.home_customer_button);
+        exitButton = findViewById(R.id.home_exit_button);
         managerButtonEnabled = false;
         managerButton.setAlpha(0.5f);
 
         managerNameText.addTextChangedListener(inputFieldsWatcher);
 
-        findViewById(R.id.home_manager_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onManagerConnection(managerName, managerButtonEnabled);
-            }
-        });
+        managerButton.setOnClickListener(v -> presenter.onManagerConnection(managerName, managerButtonEnabled));
 
-        findViewById(R.id.home_customer_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onCustomerConnection();
+        clientButton.setOnClickListener(v -> presenter.onCustomerConnection());
+
+        exitButton.setOnClickListener(v -> {
+            try {
+                presenter.onExit();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
     }
@@ -86,6 +89,10 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
     public void customerConnection() {
         Intent intent = new Intent(HomepageActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
+    }
+
+    public void exit(){
+        finish();
     }
 
     public void showToast(String msg) {

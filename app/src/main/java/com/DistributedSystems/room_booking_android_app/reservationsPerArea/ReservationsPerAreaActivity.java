@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +13,9 @@ import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 
 public class ReservationsPerAreaActivity extends AppCompatActivity implements ReservationsPerAreaView {
-
+    String managerName;
+    EditText managerText;
+    ImageView image;
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +23,10 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
 
         final ReservationsPerAreaPresenter presenter = new ReservationsPerAreaPresenter(this);
 
-        findViewById(R.id.reservationPerAreaExitButton).setOnClickListener(new View.OnClickListener() {
-               public void onClick(View v) {
-                    presenter.onExit();
-                }
-        });
+        image = findViewById(R.id.imageViewEx);
+        Thread t1 = new GetServerImage(image);
+        t1.start();
+        findViewById(R.id.reservationPerAreaExitButton).setOnClickListener(v -> presenter.onExit());
 
     }
 
