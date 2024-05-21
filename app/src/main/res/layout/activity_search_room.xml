@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toStartOf="@+id/endPrice"
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ownerNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/starsText" />
 
     <EditText
-        android:id="@+id/priceEditText"
+        android:id="@+id/startPriceText"
         android:layout_width="154dp"
         android:layout_height="66dp"
         android:ems="10"
@@ -40,10 +40,10 @@
         android:text="Max price:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ownerNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/starsText" />
 
     <EditText
-        android:id="@+id/priceText"
+        android:id="@+id/endPriceText"
         android:layout_width="140dp"
         android:layout_height="59dp"
         android:ems="10"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toStartOf="@+id/departureDate"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/startPriceText" />
 
     <EditText
         android:id="@+id/startingDateText"
@@ -89,7 +89,7 @@
         android:text="Departure date:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceText" />
+        app:layout_constraintTop_toBottomOf="@+id/endPriceText" />
 
     <EditText
         android:id="@+id/departureDateText"
@@ -165,7 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filtersText" />
 
     <EditText
-        android:id="@+id/ownerNameText"
+        android:id="@+id/starsText"
         android:layout_width="154dp"
         android:layout_height="59dp"
         android:ems="10"
@@ -197,7 +197,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ownerNameText"
+        app:layout_constraintTop_toBottomOf="@+id/starsText"
         app:layout_constraintVertical_bias="0.781"
         tools:ignore="MissingConstraints" />
 

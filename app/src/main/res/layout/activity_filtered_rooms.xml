@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary95"
+    >
+
+    <TextView
+        android:id="@+id/filters"
+        android:layout_width="376dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="serif"
+        android:text="Rooms available based on your filters ✔️"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/filteredRooms"
+        android:layout_width="357dp"
+        android:layout_height="432dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="@+id/filters"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filters"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
+
+    <TextView
+        android:id="@+id/idSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="serif"
+        android:text="Give room's id for reservation: "
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/filters"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filters"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/idSelection"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/idSelection"
+        app:layout_constraintTop_toBottomOf="@+id/idSelection" />
+
+    <Button
+        android:id="@+id/reserveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Reserve"
+        app:layout_constraintEnd_toEndOf="@+id/filteredRooms"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="@+id/filteredRooms"
+        app:layout_constraintTop_toBottomOf="@+id/filteredRooms" />
+</androidx.constraintlayout.widget.ConstraintLayout>
