@@ -3,6 +3,7 @@ package com.DistributedSystems.room_booking_android_app.managerReservations;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.DistributedSystems.room_booking_android_app.domain.Room;
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
@@ -25,6 +26,7 @@ public class ManagerReservationsThread extends Thread{
     public void run() {
 
         try {
+            Log.d("Message", String.valueOf(1));
             Dao.getOut().writeInt(33);
             Dao.getOut().flush();
 

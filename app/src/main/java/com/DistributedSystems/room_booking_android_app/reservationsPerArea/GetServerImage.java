@@ -23,8 +23,6 @@ public class GetServerImage extends Thread {
 
             length = Dao.getIn().readInt();
 
-
-
             byte[] imageData = new byte[length];
             Dao.getIn().readFully(imageData, 0, imageData.length);
 

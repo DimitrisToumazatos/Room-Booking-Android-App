@@ -1,5 +1,7 @@
 package com.DistributedSystems.room_booking_android_app.homepage;
 
+import android.util.Log;
+
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class SendManagerNameThread extends Thread {
             Dao.getOut().flush();
             Dao.getOut().writeObject(managerName);
             Dao.getOut().flush();
+            Log.d("ManagerName", managerName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
