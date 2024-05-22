@@ -2,8 +2,6 @@ package com.DistributedSystems.room_booking_android_app.homepage;
 
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
-import java.io.IOException;
-
 public class HomepagePresenter {
 
     private final HomepageView view;
@@ -31,11 +29,5 @@ public class HomepagePresenter {
     void onCustomerConnection() {
         new SendCustomerThread().start();
         view.customerConnection();
-    }
-
-    void onExit() throws IOException {
-        view.showToast("Exiting the app");
-        Dao.terminateConnections();
-        view.exit();
     }
 }

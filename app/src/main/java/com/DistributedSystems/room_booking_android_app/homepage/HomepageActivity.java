@@ -16,8 +16,6 @@ import com.DistributedSystems.room_booking_android_app.customerConnection.Custom
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
-import java.io.IOException;
-
 public class HomepageActivity extends AppCompatActivity implements HomepageView {
     String managerName;
     EditText managerNameText;
@@ -60,7 +58,6 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
 
         managerButton = findViewById(R.id.home_manager_button);
         clientButton = findViewById(R.id.home_customer_button);
-        exitButton = findViewById(R.id.home_exit_button);
         managerButtonEnabled = false;
         managerButton.setAlpha(0.5f);
 
@@ -69,14 +66,6 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
         managerButton.setOnClickListener(v -> presenter.onManagerConnection(managerName, managerButtonEnabled));
 
         clientButton.setOnClickListener(v -> presenter.onCustomerConnection());
-
-        exitButton.setOnClickListener(v -> {
-            try {
-                presenter.onExit();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
     }
 
     @Override
@@ -89,10 +78,6 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
     public void customerConnection() {
         Intent intent = new Intent(HomepageActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
-    }
-
-    public void exit(){
-        finish();
     }
 
     public void showToast(String msg) {

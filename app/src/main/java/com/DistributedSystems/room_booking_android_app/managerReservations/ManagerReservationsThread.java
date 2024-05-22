@@ -3,15 +3,10 @@ package com.DistributedSystems.room_booking_android_app.managerReservations;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
-import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
-import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerReservationsThread extends Thread{

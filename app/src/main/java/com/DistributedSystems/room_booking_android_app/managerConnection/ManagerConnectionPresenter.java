@@ -18,4 +18,7 @@ public class ManagerConnectionPresenter {
 
     void onGetReservationsPerArea () {view.getReservationsPerArea();}
 
+    void onExit() {
+        view.onExitButton();
+    }
 }

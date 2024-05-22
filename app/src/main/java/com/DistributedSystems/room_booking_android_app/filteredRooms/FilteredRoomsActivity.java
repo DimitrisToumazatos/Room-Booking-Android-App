@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
 import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;

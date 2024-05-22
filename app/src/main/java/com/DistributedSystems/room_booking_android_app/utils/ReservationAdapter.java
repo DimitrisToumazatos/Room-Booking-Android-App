@@ -1,11 +1,8 @@
 package com.DistributedSystems.room_booking_android_app.utils;
 
-import static com.DistributedSystems.room_booking_android_app.utils.RoomAdapter.parser;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -15,7 +12,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationAdapter extends BaseAdapter {

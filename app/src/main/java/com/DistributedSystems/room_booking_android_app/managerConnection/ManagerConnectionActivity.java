@@ -1,5 +1,6 @@
 package com.DistributedSystems.room_booking_android_app.managerConnection;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +12,11 @@ import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
 import com.DistributedSystems.room_booking_android_app.insertion.InsertRoomActivity;
 import com.DistributedSystems.room_booking_android_app.reservationsPerArea.ReservationsPerAreaActivity;
+import com.DistributedSystems.room_booking_android_app.utils.TerminateAppThread;
 
 public class ManagerConnectionActivity extends AppCompatActivity implements ManagerConnectionView {
 
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
@@ -44,6 +47,11 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
             }
         });
 
+        findViewById(R.id.exitButtonManager).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onExit();
+            }
+        });
     }
 
     public void insertRoom() {
@@ -64,5 +72,10 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
     public void getReservationsPerArea(){
         Intent intent = new Intent(ManagerConnectionActivity.this, ReservationsPerAreaActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onExitButton() {
+        new TerminateAppThread().start();
     }
 }

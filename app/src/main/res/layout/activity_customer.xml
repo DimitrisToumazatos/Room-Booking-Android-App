@@ -35,10 +35,21 @@
         android:id="@+id/rate"
         android:layout_width="201dp"
         android:layout_height="70dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="68dp"
         android:text="Rate a room"
         app:layout_constraintEnd_toEndOf="@+id/search"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/search"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="201dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="64dp"
+        android:text="Exit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

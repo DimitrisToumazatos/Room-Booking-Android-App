@@ -8,4 +8,6 @@ public interface ManagerConnectionView {
     void getManagersReservations();
 
     void getReservationsPerArea();
+
+    void onExitButton();
 }

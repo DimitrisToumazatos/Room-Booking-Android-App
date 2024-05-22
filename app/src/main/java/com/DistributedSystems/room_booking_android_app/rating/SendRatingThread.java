@@ -1,11 +1,8 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
-import android.os.Handler;
-
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SendRatingThread extends Thread{
     int roomId, rating;

@@ -1,7 +1,5 @@
 package com.DistributedSystems.room_booking_android_app.homepage;
 
-import android.util.Log;
-
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
