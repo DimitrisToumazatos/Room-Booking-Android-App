@@ -11,7 +11,7 @@
         android:id="@+id/filters"
         android:layout_width="376dp"
         android:layout_height="43dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="serif"
         android:text="Rooms available based on your filters ✔️"
         android:textSize="17sp"
@@ -26,7 +26,7 @@
         android:id="@+id/filteredRooms"
         android:layout_width="357dp"
         android:layout_height="432dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="164dp"
         app:layout_constraintEnd_toEndOf="@+id/filters"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/filters"
@@ -34,11 +34,11 @@
 
     <TextView
         android:id="@+id/idSelection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="91dp"
+        android:layout_height="29dp"
         android:layout_marginTop="8dp"
         android:fontFamily="serif"
-        android:text="Give room's id for reservation: "
+        android:text="Room's id: "
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/filters"
@@ -47,26 +47,107 @@
         app:layout_constraintTop_toBottomOf="@+id/filters" />
 
     <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:id="@+id/idEditText"
+        android:layout_width="142dp"
+        android:layout_height="39dp"
         android:ems="10"
         android:hint="id"
         android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toEndOf="@+id/idSelection"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
+
+    <TextView
+        android:id="@+id/stDateSelection"
+        android:layout_width="127dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="serif"
+        android:text="Starting Date: "
+        android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/idSelection"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="@+id/idSelection"
         app:layout_constraintTop_toBottomOf="@+id/idSelection" />
+
+
+    <TextView
+        android:id="@+id/depDateSelection"
+        android:layout_width="153dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="serif"
+        android:text="Departure Date: "
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/stDateSelection"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/stDateSelection"
+        app:layout_constraintTop_toBottomOf="@+id/stDateSelection" />
+
+    <TextView
+        android:id="@+id/nameSelection"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="serif"
+        android:text="Name: "
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/depDateSelection"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/depDateSelection"
+        app:layout_constraintTop_toBottomOf="@+id/depDateSelection" />
+
+    <EditText
+        android:id="@+id/stDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintStart_toEndOf="@+id/stDateSelection"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
+
+    <EditText
+        android:id="@+id/depDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="76dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/depDateSelection"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nameSelection"
+        app:layout_constraintTop_toBottomOf="@+id/filters" />
 
     <Button
         android:id="@+id/reserveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:text="Reserve"
         app:layout_constraintEnd_toEndOf="@+id/filteredRooms"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/filteredRooms"
         app:layout_constraintTop_toBottomOf="@+id/filteredRooms" />
 </androidx.constraintlayout.widget.ConstraintLayout>

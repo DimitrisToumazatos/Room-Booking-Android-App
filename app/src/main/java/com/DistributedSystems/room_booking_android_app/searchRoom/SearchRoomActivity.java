@@ -2,21 +2,19 @@ package com.DistributedSystems.room_booking_android_app.searchRoom;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
-import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionPresenter;
 import com.DistributedSystems.room_booking_android_app.filteredRooms.FilteredRoomsActivity;
-import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
-import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
 import org.json.JSONException;
@@ -26,34 +24,6 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
     EditText starsText, startPriceText, endPriceText, startingDateText, departureDateText,areaText, personsText;
     String stars, startPrice, endPrice, startingDate, departureDate, area, persons;
     Button searchButton;
-    boolean defaultSearch;
-
-    TextWatcher inputFieldsWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            stars = ViewUtils.getTextFromEditTextElement(starsText);
-            startPrice = ViewUtils.getTextFromEditTextElement(startPriceText);
-            endPrice = ViewUtils.getTextFromEditTextElement(endPriceText);
-            startingDate = ViewUtils.getTextFromEditTextElement(startingDateText);
-            departureDate = ViewUtils.getTextFromEditTextElement(departureDateText);
-            area = ViewUtils.getTextFromEditTextElement(areaText);
-            persons = ViewUtils.getTextFromEditTextElement(personsText);
-
-            if (stars.isEmpty() && startPrice.isEmpty() && endPrice.isEmpty() && startingDate.isEmpty() && departureDate.isEmpty() && area.isEmpty() && persons.isEmpty()) {
-                defaultSearch =  true;
-            } else {
-                defaultSearch = false;
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +41,20 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
         personsText = findViewById(R.id.personsText);
 
         searchButton = findViewById(R.id.search_button);
-        defaultSearch = false;
-
-        starsText.addTextChangedListener(inputFieldsWatcher);
-        startPriceText.addTextChangedListener(inputFieldsWatcher);
-        endPriceText.addTextChangedListener(inputFieldsWatcher);
-        startingDateText.addTextChangedListener(inputFieldsWatcher);
-        departureDateText.addTextChangedListener(inputFieldsWatcher);
-        areaText.addTextChangedListener(inputFieldsWatcher);
-        personsText.addTextChangedListener(inputFieldsWatcher);
 
         findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void onClick(View v) {
                 try {
-                    presenter.onSearchRoom(stars, startPrice, endPrice, startingDate, departureDate, area, persons, defaultSearch);
+                    stars = ViewUtils.getTextFromEditTextElement(starsText);
+                    startPrice = ViewUtils.getTextFromEditTextElement(startPriceText);
+                    endPrice = ViewUtils.getTextFromEditTextElement(endPriceText);
+                    startingDate = ViewUtils.getTextFromEditTextElement(startingDateText);
+                    departureDate = ViewUtils.getTextFromEditTextElement(departureDateText);
+                    area = ViewUtils.getTextFromEditTextElement(areaText);
+                    persons = ViewUtils.getTextFromEditTextElement(personsText);
+
+                    presenter.onSearchRoom(stars, startPrice, endPrice, startingDate, departureDate, area, persons);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -94,6 +64,7 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
     }
 
     public void searchRoom(String search){
+        Log.d("message","1");
         Intent intent = new Intent(SearchRoomActivity.this, FilteredRoomsActivity.class);
         intent.putExtra("searchOption", search);
         startActivity(intent);

@@ -29,16 +29,8 @@ public class Dao {
         return out;
     }
 
-    public static void setIn(ObjectInputStream in) {
-        Dao.in = in;
-    }
-
-    public static void setOut(ObjectOutputStream out) {
-        Dao.out = out;
-    }
-
     public static void initializeConnections() throws IOException {
-        socket = new Socket("192.168.1.5", 8000);
+        socket = new Socket("192.168.1.6", 8000);
         in = new ObjectInputStream(socket.getInputStream());
         out = new ObjectOutputStream(socket.getOutputStream());
     }

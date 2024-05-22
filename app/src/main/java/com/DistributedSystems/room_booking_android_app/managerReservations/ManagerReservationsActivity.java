@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
-import com.DistributedSystems.room_booking_android_app.domain.Reservation;
+import com.DistributedSystems.room_booking_android_app.utils.Reservation;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ReservationAdapter;
 

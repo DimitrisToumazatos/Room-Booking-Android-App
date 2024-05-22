@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.utils.DefaultRoomSearchThread;
 import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
@@ -35,10 +33,8 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     Button rateRoomButton;
     Boolean rateRoomButtonEnabled;
     ListView roomListView;
-    TextView myText;
     RoomAdapter adapter;
     ArrayList<String> roomStrings = new ArrayList<>();
-
     ArrayList<Room> rooms;
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,7 +78,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
         roomListView.setAdapter(adapter);
 
-        DefaultRoomSearchThread t1 = new DefaultRoomSearchThread(myHandler, roomStrings);
+        RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings);
         t1.start();
 
         roomIdText = findViewById(R.id.roomIdText);
