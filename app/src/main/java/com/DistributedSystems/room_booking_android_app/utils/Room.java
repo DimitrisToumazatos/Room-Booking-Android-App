@@ -1,8 +1,10 @@
-package com.DistributedSystems.room_booking_android_app.domain;
+package com.DistributedSystems.room_booking_android_app.utils;
 
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+
+import com.DistributedSystems.room_booking_android_app.utils.Reservation;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

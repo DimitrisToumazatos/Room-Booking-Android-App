@@ -1,7 +1,7 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
 
-import com.DistributedSystems.room_booking_android_app.domain.Room;
+import com.DistributedSystems.room_booking_android_app.utils.Room;
 
 import java.util.ArrayList;
 

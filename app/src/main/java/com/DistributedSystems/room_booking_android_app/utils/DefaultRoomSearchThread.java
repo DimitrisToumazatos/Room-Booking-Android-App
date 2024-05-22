@@ -1,9 +1,9 @@
-package com.DistributedSystems.room_booking_android_app.rating;
+package com.DistributedSystems.room_booking_android_app.utils;
 
 import android.os.Bundle;
 import android.os.Message;
 
-import com.DistributedSystems.room_booking_android_app.domain.Room;
+import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
@@ -13,11 +13,11 @@ import android.os.Handler;
 
 import org.json.simple.parser.ParseException;
 
-public class RateRoomSearchThread extends Thread {
+public class DefaultRoomSearchThread extends Thread {
 
     Handler handler;
     ArrayList<String> roomStrings;
-    public RateRoomSearchThread(Handler handler, ArrayList<String> roomStrings) {
+    public DefaultRoomSearchThread(Handler handler, ArrayList<String> roomStrings) {
         this.handler = handler;
         this.roomStrings = roomStrings;
     }

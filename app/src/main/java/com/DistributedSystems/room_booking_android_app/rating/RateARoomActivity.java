@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.domain.Room;
+import com.DistributedSystems.room_booking_android_app.utils.DefaultRoomSearchThread;
+import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
@@ -82,7 +82,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
         roomListView.setAdapter(adapter);
 
-        RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings);
+        DefaultRoomSearchThread t1 = new DefaultRoomSearchThread(myHandler, roomStrings);
         t1.start();
 
         roomIdText = findViewById(R.id.roomIdText);

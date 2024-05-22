@@ -1,4 +1,4 @@
-package com.DistributedSystems.room_booking_android_app.domain;
+package com.DistributedSystems.room_booking_android_app.utils;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;

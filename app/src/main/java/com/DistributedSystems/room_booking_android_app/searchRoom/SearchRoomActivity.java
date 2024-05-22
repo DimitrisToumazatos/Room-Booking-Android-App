@@ -19,12 +19,14 @@ import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
+import org.json.JSONException;
+
 public class SearchRoomActivity extends AppCompatActivity implements SearchRoomView {
 
     EditText starsText, startPriceText, endPriceText, startingDateText, departureDateText,areaText, personsText;
     String stars, startPrice, endPrice, startingDate, departureDate, area, persons;
     Button searchButton;
-    Boolean searchButtonEnabled;
+    boolean defaultSearch;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         @Override
@@ -41,12 +43,10 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
             area = ViewUtils.getTextFromEditTextElement(areaText);
             persons = ViewUtils.getTextFromEditTextElement(personsText);
 
-            if (stars.isEmpty() || startPrice.isEmpty() || endPrice.isEmpty() || startingDate.isEmpty() || departureDate.isEmpty() || area.isEmpty() || persons.isEmpty()) {
-                searchButton.setAlpha(0.5f);
-                searchButtonEnabled = false;
+            if (stars.isEmpty() && startPrice.isEmpty() && endPrice.isEmpty() && startingDate.isEmpty() && departureDate.isEmpty() && area.isEmpty() && persons.isEmpty()) {
+                defaultSearch =  true;
             } else {
-                searchButton.setAlpha(1.0f);
-                searchButtonEnabled = true;
+                defaultSearch = false;
             }
         }
 
@@ -71,8 +71,7 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
         personsText = findViewById(R.id.personsText);
 
         searchButton = findViewById(R.id.search_button);
-        searchButton.setAlpha(0.5f);
-        searchButtonEnabled = false;
+        defaultSearch = false;
 
         starsText.addTextChangedListener(inputFieldsWatcher);
         startPriceText.addTextChangedListener(inputFieldsWatcher);
@@ -84,14 +83,19 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
 
         findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                presenter.onSearchRoom(stars, startPrice, endPrice, startingDate, departureDate, area, persons, searchButtonEnabled);
+                try {
+                    presenter.onSearchRoom(stars, startPrice, endPrice, startingDate, departureDate, area, persons, defaultSearch);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
     }
 
-    public void searchRoom(){
+    public void searchRoom(String search){
         Intent intent = new Intent(SearchRoomActivity.this, FilteredRoomsActivity.class);
+        intent.putExtra("searchOption", search);
         startActivity(intent);
     }
 
