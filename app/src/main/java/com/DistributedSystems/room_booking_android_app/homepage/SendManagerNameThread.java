@@ -18,7 +18,6 @@ public class SendManagerNameThread extends Thread {
             Dao.getOut().flush();
             Dao.getOut().writeObject(managerName);
             Dao.getOut().flush();
-            Log.d("ManagerName", managerName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

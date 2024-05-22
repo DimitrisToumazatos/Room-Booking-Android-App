@@ -8,12 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SendRatingThread extends Thread{
-
-    Handler handler;
-
     int roomId, rating;
-    public SendRatingThread(Handler handler, String roomId, String rating) {
-        this.handler = handler;
+    public SendRatingThread(String roomId, String rating) {
         this.roomId = Integer.parseInt(roomId);
         this.rating = Integer.parseInt(rating);
     }

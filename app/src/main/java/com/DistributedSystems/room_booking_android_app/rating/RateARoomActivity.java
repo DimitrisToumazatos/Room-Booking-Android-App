@@ -93,12 +93,11 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
 
         rateRoomButton.setOnClickListener(v -> {
             presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms);
-            SendRatingThread t2 = new SendRatingThread(myHandler, roomId, rating);
-            t2.start();
         });
     }
 
     public void rateRoom() {
+        new SendRatingThread(roomId, rating).start();
         Intent intent = new Intent(RateARoomActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
     }

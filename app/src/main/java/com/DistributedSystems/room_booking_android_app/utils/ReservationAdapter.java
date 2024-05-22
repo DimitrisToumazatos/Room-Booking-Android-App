@@ -20,12 +20,12 @@ import java.util.List;
 
 public class ReservationAdapter extends BaseAdapter {
 
-    ArrayList<String> reservationStrings;
+    List<String> reservationStrings;
     LayoutInflater inflater;
     static JSONParser parser = new JSONParser();
 
 
-    public ReservationAdapter(LayoutInflater inflater, ArrayList<String> reservationStrings) {
+    public ReservationAdapter(LayoutInflater inflater, List<String> reservationStrings) {
         this.inflater = inflater;
         this.reservationStrings = reservationStrings;
     }
@@ -58,6 +58,7 @@ public class ReservationAdapter extends BaseAdapter {
 
         try {
             JSONObject json = (JSONObject) parser.parse(reservationStrings.get(position));
+
             nameTextView.setText((String) json.get("customerName"));
             startDateTextView.setText((String) json.get("startingDate"));
             departureDateTextView.setText((String) json.get("departureDate"));
@@ -68,4 +69,3 @@ public class ReservationAdapter extends BaseAdapter {
         return convertView;
     }
 }
-

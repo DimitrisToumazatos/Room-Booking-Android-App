@@ -49,6 +49,7 @@ public class RoomAdapter extends BaseAdapter {
 
         try {
             JSONObject json = (JSONObject) parser.parse(roomStrings.get(position));
+
             nameTextView.setText((String) json.get("roomName"));
             idTextView.setText((Long.toString((Long) json.get("id"))));
         } catch (ParseException e) {

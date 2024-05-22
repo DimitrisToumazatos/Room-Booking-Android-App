@@ -144,10 +144,20 @@
         android:id="@+id/reserveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="Reserve"
         app:layout_constraintEnd_toEndOf="@+id/filteredRooms"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="@+id/filteredRooms"
+        app:layout_constraintTop_toBottomOf="@+id/filteredRooms" />
+
+    <Button
+        android:id="@+id/exitReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="24dp"
+        android:text="Exit"
+        app:layout_constraintStart_toEndOf="@+id/reserveButton"
         app:layout_constraintTop_toBottomOf="@+id/filteredRooms" />
 </androidx.constraintlayout.widget.ConstraintLayout>

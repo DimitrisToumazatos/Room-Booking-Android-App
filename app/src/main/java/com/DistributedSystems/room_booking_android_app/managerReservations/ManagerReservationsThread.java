@@ -17,8 +17,8 @@ import java.util.List;
 public class ManagerReservationsThread extends Thread{
 
     Handler handler;
-    ArrayList<String> reservationStrings;
-    public ManagerReservationsThread(Handler handler, ArrayList<String> reservationStrings) {
+    List<String> reservationStrings;
+    public ManagerReservationsThread(Handler handler, List<String> reservationStrings) {
         this.handler = handler;
         this.reservationStrings = reservationStrings;
     }
@@ -30,19 +30,15 @@ public class ManagerReservationsThread extends Thread{
             Dao.getOut().flush();
 
             List<String> rooms = (List<String>) Dao.getIn().readObject();
-            ArrayList<Room> reservationObjects = new ArrayList<>();
-            for (String room : rooms){
-                reservationObjects.add(new Room(room));
-            }
+
             reservationStrings.addAll(rooms);
 
             Message msg = new Message();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("Reservations", reservationObjects);
             msg.setData(bundle);
             handler.sendMessage(msg);
 
-        } catch (IOException | ClassNotFoundException | ParseException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

@@ -2,6 +2,7 @@ package com.DistributedSystems.room_booking_android_app.filteredRooms;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,9 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
+import com.DistributedSystems.room_booking_android_app.customerConnection.CustomerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.homepage.HomepageActivity;
 import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
@@ -29,7 +32,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     EditText roomIdText, stDateText, depDateText, customerNameText;
     ListView roomListView;
     String roomId, stDate, depDate, customerName;
-    Button reserveButton;
+    Button reserveButton, exitButton;
     boolean reserveButtonEnabled;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
@@ -104,13 +107,32 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
 
         findViewById(R.id.reserveButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                presenter.onReserveButton();
+                presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms);
+            }
+        });
+
+        findViewById(R.id.exitReservation).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onExit();
             }
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void reserveButton() {
-        Intent intent = new Intent(FilteredRoomsActivity.this, HomepageActivity.class);
+        new ReservationRequestThread(roomId, stDate, depDate, customerName).start();
+        Intent intent = new Intent(FilteredRoomsActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
+    }
+
+    public void exitButton() {
+        new ExitReservationThread().start();
+        Intent intent = new Intent(FilteredRoomsActivity.this, CustomerConnectionActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showToast(String msg) {
+
     }
 }

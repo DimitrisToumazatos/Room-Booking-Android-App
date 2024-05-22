@@ -18,19 +18,17 @@ import com.DistributedSystems.room_booking_android_app.utils.ReservationAdapter;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManagerReservationsActivity extends AppCompatActivity implements ManagerReservationsView {
 
     ReservationAdapter adapter;
     ListView reservationListView;
-    ArrayList<String> reservationStrings = new ArrayList<>();
-    ArrayList<Reservation> reservations;
-
+    List<String> reservationStrings = new ArrayList<>();
 
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            reservations = (ArrayList<Reservation>) message.getData().getSerializable("Reservations");
             adapter.notifyDataSetChanged();
             return false;
         }
@@ -46,8 +44,7 @@ public class ManagerReservationsActivity extends AppCompatActivity implements Ma
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 
-        ManagerReservationsThread t1 = new ManagerReservationsThread(myHandler, reservationStrings);
-        t1.start();
+        new ManagerReservationsThread(myHandler, reservationStrings).start();
 
         findViewById(R.id.reservationListExitButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

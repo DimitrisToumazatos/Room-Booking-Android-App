@@ -27,7 +27,6 @@ public class FilteredSearchThread extends Thread {
     @Override
     public void run() {
         try {
-            Log.d("poutsa","3");
             Dao.getOut().writeInt(11);
             Dao.getOut().flush();
             Dao.getOut().writeObject(searchOption);

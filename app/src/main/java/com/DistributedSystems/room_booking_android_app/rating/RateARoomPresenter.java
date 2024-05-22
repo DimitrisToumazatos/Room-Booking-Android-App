@@ -9,12 +9,11 @@ public class RateARoomPresenter {
 
     private final RateARoomView view;
 
-
     public RateARoomPresenter(RateARoomView view) {
         this.view = view;
     }
 
-    void onRateRoom(String roomId, String rating, Boolean rateRoomButtonEnabled, ArrayList<Room> roomObjects){
+    void onRateRoom(String roomId, String rating, boolean rateRoomButtonEnabled, ArrayList<Room> roomObjects){
         String ERROR_INVALID_RATING_MSG ="Please give a rating between 1 and 5!";
         String ERROR_EMPTY_FIELD_MSG = "Please fill all the given fields";
         String ERROR_INVALID_ROOM_ID = "Please give a room id among the existing ones";
