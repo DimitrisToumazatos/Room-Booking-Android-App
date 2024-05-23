@@ -24,8 +24,6 @@ import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
 import java.util.ArrayList;
 
-
-
 public class RateARoomActivity extends AppCompatActivity implements RateARoomView {
 
     EditText roomIdText, ratingText;
@@ -43,13 +41,31 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             roomId = ViewUtils.getTextFromEditTextElement(roomIdText);
             rating = ViewUtils.getTextFromEditTextElement(ratingText);
+            boolean roomIdPassed = true, ratingPassed = true;
+            try{
+                int roomIdTemp = Integer.parseInt(roomId);
+                if(roomIdTemp >= (rooms.size() - 1) || roomIdTemp < 0){
+                    roomIdPassed = false;
+                }
+            }catch(Exception e){
+                roomIdPassed = false;
+            }
 
-            if(roomId.isEmpty() || rating.isEmpty()){
-                rateRoomButton.setAlpha(0.5f);
-                rateRoomButtonEnabled = false;
-            } else {
+            try{
+                int ratingTemp = Integer.parseInt(rating);
+                if(ratingTemp > 5 || ratingTemp < 0){
+                    ratingPassed = false;
+                }
+            }catch(Exception e){
+                ratingPassed = false;
+            }
+
+            if(!(roomId.isEmpty() || rating.isEmpty()) && (ratingPassed && roomIdPassed)){
                 rateRoomButton.setAlpha(1.0f);
                 rateRoomButtonEnabled = true;
+            } else {
+                rateRoomButton.setAlpha(0.5f);
+                rateRoomButtonEnabled = false;
             }
         }
 
@@ -91,9 +107,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         roomIdText.addTextChangedListener(inputFieldsWatcher);
         ratingText.addTextChangedListener(inputFieldsWatcher);
 
-        rateRoomButton.setOnClickListener(v -> {
-            presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms);
-        });
+        rateRoomButton.setOnClickListener(v -> presenter.onRateRoom(roomId, rating, rateRoomButtonEnabled, rooms));
     }
 
     public void rateRoom() {

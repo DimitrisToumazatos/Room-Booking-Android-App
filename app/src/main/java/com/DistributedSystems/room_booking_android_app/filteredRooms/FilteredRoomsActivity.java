@@ -25,13 +25,15 @@ import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FilteredRoomsActivity extends AppCompatActivity implements FilteredRoomsView {
     EditText roomIdText, stDateText, depDateText, customerNameText;
     ListView roomListView;
     String roomId, stDate, depDate, customerName;
-    Button reserveButton, exitButton;
+    Button reserveButton;
     boolean reserveButtonEnabled;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
@@ -42,18 +44,50 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             roomId = ViewUtils.getTextFromEditTextElement(roomIdText);
             stDate = ViewUtils.getTextFromEditTextElement(stDateText);
             depDate = ViewUtils.getTextFromEditTextElement(depDateText);
             customerName = ViewUtils.getTextFromEditTextElement(customerNameText);
+            boolean roomIdPassed = true, stDatePassed = true, depDatePassed = true, customerNamePassed = true;
 
-            if(roomId.isEmpty() || stDate.isEmpty() || depDate.isEmpty() || customerName.isEmpty()){
-                reserveButton.setAlpha(0.5f);
-                reserveButtonEnabled = false;
-            } else {
+            try{
+                Integer.parseInt(roomId);
+            }catch(Exception e){
+                roomIdPassed = false;
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            LocalDate startingDate = LocalDate.now(), departureDate;
+            try{
+                startingDate = LocalDate.parse(stDate, formatter);
+                if(startingDate.isBefore(LocalDate.now())){
+                    stDatePassed = false;
+                }
+
+            }catch(Exception e){
+                stDatePassed = false;
+            }
+
+            try{
+                departureDate = LocalDate.parse(depDate, formatter);
+                if(departureDate.isBefore(LocalDate.now()) || departureDate.isBefore(startingDate)){
+                    depDatePassed = false;
+                }
+            }catch(Exception e){
+                depDatePassed = false;
+            }
+
+            customerNamePassed = isAlpha(customerName);
+
+            if((roomId.isEmpty() || stDate.isEmpty() || depDate.isEmpty() || customerName.isEmpty()) && (roomIdPassed && stDatePassed && depDatePassed && customerNamePassed)){
                 reserveButton.setAlpha(1.0f);
                 reserveButtonEnabled = true;
+            } else {
+                reserveButton.setAlpha(0.5f);
+                reserveButtonEnabled = false;
             }
         }
 
@@ -104,17 +138,9 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         stDateText.addTextChangedListener(inputFieldsWatcher);
         depDateText.addTextChangedListener(inputFieldsWatcher);
 
-        findViewById(R.id.reserveButton).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms);
-            }
-        });
+        findViewById(R.id.reserveButton).setOnClickListener(v -> presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms));
 
-        findViewById(R.id.exitReservation).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onExit();
-            }
-        });
+        findViewById(R.id.exitReservation).setOnClickListener(v -> presenter.onExit());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -128,6 +154,18 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         new ExitReservationThread().start();
         Intent intent = new Intent(FilteredRoomsActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
+    }
+
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

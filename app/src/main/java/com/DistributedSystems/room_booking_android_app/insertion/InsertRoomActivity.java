@@ -20,6 +20,8 @@ import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class InsertRoomActivity extends AppCompatActivity implements InsertRoomView {
 
@@ -32,6 +34,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             roomName = ViewUtils.getTextFromEditTextElement(roomNameText);
@@ -41,13 +44,48 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
             roomImage = ViewUtils.getTextFromEditTextElement(roomImageText);
             roomStDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
             roomDepDate = ViewUtils.getTextFromEditTextElement(roomDepDateText);
+            boolean roomPricePassed = true, roomCapacityPassed = true, roomStDatePassed = true, roomDepDatePassed = true, roomNamePassed = true;
+            try{
+                Integer.parseInt(roomPrice);
+            }catch (Exception e){
+                roomPricePassed = false;
+            }
 
-            if (roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) {
-                insertButton.setAlpha(0.5f);
-                insertButtonEnabled = false;
-            } else {
+            try{
+                Integer.parseInt(roomCapacity);
+            }catch(Exception e){
+                roomCapacityPassed = false;
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate stDate = LocalDate.now(), depDate;
+
+            try{
+                stDate = LocalDate.parse(roomStDate, formatter);
+                if(stDate.isBefore(LocalDate.now())){
+                    roomStDatePassed = false;
+                }
+            }catch(Exception e){
+                roomStDatePassed = false;
+            }
+
+            try{
+                depDate = LocalDate.parse(roomDepDate, formatter);
+                if(depDate.isBefore(LocalDate.now()) || depDate.isBefore(stDate)){
+                    roomDepDatePassed = false;
+                }
+            }catch(Exception e){
+                roomDepDatePassed = false;
+            }
+
+            roomNamePassed = isAlpha(roomName);
+
+            if (!(roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) && (roomPricePassed && roomDepDatePassed && roomStDatePassed && roomCapacityPassed && roomNamePassed)) {
                 insertButton.setAlpha(1.0f);
                 insertButtonEnabled = true;
+            } else {
+                insertButton.setAlpha(0.5f);
+                insertButtonEnabled = false;
             }
         }
 
@@ -102,4 +140,17 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

@@ -28,31 +28,51 @@ public class SearchRoomPresenter {
         String ERROR_DATE_PASSED_MSG = "The date you chose has passed!";
         String ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG = "Your End Date is before the starting date!";
         String ERROR_BOTH_DATES_MSG = "Please enter both dates!";
+        String ERROR_WRONG_DATES_GIVEN = "The departure date you gave is after the starting date";
+        String ERROR_AREA_NOT_STRING = "The area input you gave contains numerical values";
+        String ERROR_WRONG_START_DATE_INPUT = "The start date you gave does not comply to a valid date input";
+        String ERROR_WRONG_DEP_DATE_INPUT = "The departure date you gave does not comply to a valid date input";
+        String ERROR_PERSONS_NOT_NUMERICAL = "The persons input you gave is not numerical";
+        String ERROR_START_PRICE_NOT_NUMERICAL = "The starting price input you gave is not numerical";
+        String ERROR_END_PRICE_NOT_NUMERICAL = "The end price input you gave is not numerical";
+        String ERROR_LOCAL_STARS_NOT_NUMERICAL = "The stars input you gave is not numerical";
 
         if (stars.isEmpty() && startPrice.isEmpty() && endPrice.isEmpty() && startingDate.isEmpty() && departureDate.isEmpty() && area.isEmpty() && persons.isEmpty()) {
             search = "default search";
         } else {
 
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
             JSONObject filtersJson = new JSONObject();
+
             if (area.isEmpty()){
                 filtersJson.put("area", "-");
             }else{
-                filtersJson.put("area", area);
+                if(isAlpha(area)){
+                    filtersJson.put("area", area);
+                }else{
+                    view.showToast(ERROR_AREA_NOT_STRING);
+                    return;
+                }
             }
 
-            if ((startingDate.isEmpty() && !departureDate.isEmpty()) || !startingDate.isEmpty() && departureDate.isEmpty()) {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            if ((startingDate.isEmpty() && !departureDate.isEmpty()) || (!startingDate.isEmpty() && departureDate.isEmpty())) {
                 view.showToast(ERROR_BOTH_DATES_MSG);
                 return;
             }
 
-            LocalDate localStDate = null;
-            if(startingDate.isEmpty()){
+            LocalDate localStDate = null, localDepDate = null;
+            if(startingDate.isEmpty() && departureDate.isEmpty()){
                 filtersJson.put("Starting Date", null);
+                filtersJson.put("Departure Date", null);
+
             }else{
-                localStDate = LocalDate.parse(startingDate, dateFormatter);
+                try {
+                    localStDate = LocalDate.parse(startingDate, dateFormatter);
+                }catch(Exception e){
+                    view.showToast(ERROR_WRONG_START_DATE_INPUT);
+                    return;
+                }
 
                 if (LocalDate.now().isAfter(localStDate)) {
                     view.showToast(ERROR_DATE_PASSED_MSG);
@@ -60,23 +80,22 @@ public class SearchRoomPresenter {
                 }
 
                 filtersJson.put("Starting Date", localStDate);
-            }
 
-            LocalDate localDepDate = null;
-            if (departureDate.isEmpty()){
-                filtersJson.put("Departure Date", null);
-            }else{
-                localDepDate = LocalDate.parse(departureDate, dateFormatter);
-
+                try {
+                    localDepDate = LocalDate.parse(departureDate, dateFormatter);
+                }catch(Exception e){
+                    view.showToast(ERROR_WRONG_DEP_DATE_INPUT);
+                    return;
+                }
                 if (LocalDate.now().isAfter(localDepDate)) {
                     view.showToast(ERROR_DATE_PASSED_MSG);
+                    return;
+                }else if(localDepDate.isBefore(localStDate)){
+                    view.showToast(ERROR_WRONG_DATES_GIVEN);
                     return;
                 }
 
                 filtersJson.put("Departure Date", localDepDate);
-            }
-
-            if (localDepDate != null && localStDate != null) {
 
                 if (localStDate.isAfter(localDepDate)) {
                     view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
@@ -84,11 +103,16 @@ public class SearchRoomPresenter {
                 }
             }
 
-
+            int localPersons;
             if(persons.isEmpty()){
                 filtersJson.put("persons", -1);
             }else{
-                int localPersons = Integer.parseInt(persons);
+                try {
+                    localPersons = Integer.parseInt(persons);
+                }catch(Exception e){
+                    view.showToast(ERROR_PERSONS_NOT_NUMERICAL);
+                    return;
+                }
 
                 if (localPersons <= 0) {
                     view.showToast(ERROR_INVALID_CAPACITY_MSG);
@@ -98,10 +122,17 @@ public class SearchRoomPresenter {
                 filtersJson.put("persons", localPersons);
             }
 
-            if (startPrice.isEmpty()){
+            int localStartPrice, localEndPrice;
+            if (startPrice.isEmpty() && endPrice.isEmpty()){
                 filtersJson.put("Starting price", -1);
+                filtersJson.put("Final price", -1);
             }else{
-                int localStartPrice = Integer.parseInt(startPrice);
+                try {
+                     localStartPrice = Integer.parseInt(startPrice);
+                }catch(Exception e){
+                    view.showToast(ERROR_START_PRICE_NOT_NUMERICAL);
+                    return;
+                }
 
                 if (localStartPrice <= 0) {
                     view.showToast(ERROR_INVALID_PRICE_MSG);
@@ -109,12 +140,13 @@ public class SearchRoomPresenter {
                 }
 
                 filtersJson.put("Starting price", localStartPrice);
-            }
 
-            if(endPrice.isEmpty()){
-                filtersJson.put("Final price", -1);
-            }else{
-                int localEndPrice = Integer.parseInt(endPrice);
+                try{
+                    localEndPrice = Integer.parseInt(endPrice);
+                }catch(Exception e){
+                    view.showToast(ERROR_END_PRICE_NOT_NUMERICAL);
+                    return;
+                }
 
                 if (localEndPrice <= 0) {
                     view.showToast(ERROR_INVALID_PRICE_MSG);
@@ -124,10 +156,16 @@ public class SearchRoomPresenter {
                 filtersJson.put("Final Price", localEndPrice);
             }
 
+            int localStars;
             if(stars.isEmpty()){
                 filtersJson.put("stars", -1);
             }else{
-                int localStars = Integer.parseInt(stars);
+                try {
+                    localStars = Integer.parseInt(stars);
+                }catch(Exception e){
+                    view.showToast(ERROR_LOCAL_STARS_NOT_NUMERICAL);
+                    return;
+                }
 
                 if (localStars <= 0 || localStars >= 6) {
                     view.showToast(ERROR_INVALID_STARS_MSG);
@@ -139,5 +177,17 @@ public class SearchRoomPresenter {
             search = filtersJson.toString();
         }
         view.searchRoom(search);
+    }
+
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
