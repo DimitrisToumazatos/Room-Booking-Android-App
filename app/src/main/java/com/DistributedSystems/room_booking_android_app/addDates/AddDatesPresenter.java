@@ -23,18 +23,24 @@ public class AddDatesPresenter {
             return;
         }
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localRoomStDate = LocalDate.parse(startingDate, dateFormatter);
-        LocalDate localRoomDepDate = LocalDate.parse(departureDate, dateFormatter);
+        DateTimeFormatter dateFormatter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localRoomStDate = LocalDate.parse(startingDate, dateFormatter);
+            LocalDate localRoomDepDate = LocalDate.parse(departureDate, dateFormatter);
 
-        if (LocalDate.now().isAfter(localRoomStDate) || LocalDate.now().isAfter(localRoomDepDate)){
-            view.showToast(ERROR_DATE_PASSED_MSG);
+            if (LocalDate.now().isAfter(localRoomStDate) || LocalDate.now().isAfter(localRoomDepDate)){
+                view.showToast(ERROR_DATE_PASSED_MSG);
+            }
+            else if (localRoomStDate.isAfter(localRoomDepDate)){
+                view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
+            }
+            else {
+                view.addDates();
+            }
         }
-        else if (localRoomStDate.isAfter(localRoomDepDate)){
-            view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
-        }
-        else {
-            view.addDates();
-        }
+
+
+
     }
 }

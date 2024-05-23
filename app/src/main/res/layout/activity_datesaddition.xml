@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Dates"
-        app:layout_constraintEnd_toEndOf="@+id/listView2"
-        app:layout_constraintStart_toStartOf="@+id/listView2"
-        app:layout_constraintTop_toBottomOf="@+id/listView2"
+        app:layout_constraintEnd_toEndOf="@+id/addDatesListView"
+        app:layout_constraintStart_toStartOf="@+id/addDatesListView"
+        app:layout_constraintTop_toBottomOf="@+id/addDatesListView"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -68,7 +68,7 @@
         tools:ignore="MissingConstraints" />
 
     <ListView
-        android:id="@+id/listView2"
+        android:id="@+id/addDatesListView"
         android:layout_width="361dp"
         android:layout_height="403dp"
         android:layout_marginTop="88dp"
