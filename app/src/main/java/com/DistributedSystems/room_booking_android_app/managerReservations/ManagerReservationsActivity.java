@@ -1,5 +1,6 @@
 package com.DistributedSystems.room_booking_android_app.managerReservations;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,13 +34,14 @@ public class ManagerReservationsActivity extends AppCompatActivity implements Ma
         }
     });
 
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
         final ManagerReservationsPresenter presenter = new ManagerReservationsPresenter(this);
 
-        reservationListView = findViewById(R.id.reservationList);
+        reservationListView = findViewById(R.id.reservationPerAreaList);
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 

@@ -29,16 +29,71 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText"
+        app:layout_constraintVertical_bias="0.934" />
 
-    <ImageView
-        android:id="@+id/imageViewEx"
-        android:layout_width="196dp"
-        android:layout_height="146dp"
+    <ListView
+        android:id="@+id/reservationPerAreaList"
+        android:layout_width="374dp"
+        android:layout_height="384dp"
         app:layout_constraintBottom_toTopOf="@+id/reservationPerAreaExitButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintVertical_bias="0.901" />
+
+    <TextView
+        android:id="@+id/stDate"
+        android:layout_width="111dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Starting Date:"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+
+    <TextView
+        android:id="@+id/depDate"
+        android:layout_width="123dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="64dp"
+        android:text="Departure Date:"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+
+    <EditText
+        android:id="@+id/startingDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+
+    <EditText
+        android:id="@+id/departureDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.599"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPerAreaListText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
