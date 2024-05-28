@@ -34,6 +34,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
     RoomAdapter adapter;
     ArrayList<String> roomStrings = new ArrayList<>();
     ArrayList<Room> rooms;
+    ArrayList<byte[]> roomImages = new ArrayList<>();
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -91,7 +92,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         final RateARoomPresenter presenter = new RateARoomPresenter(this);
 
         roomListView = findViewById(R.id.rateListView);
-        adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
+        adapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(adapter);
 
         RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings);

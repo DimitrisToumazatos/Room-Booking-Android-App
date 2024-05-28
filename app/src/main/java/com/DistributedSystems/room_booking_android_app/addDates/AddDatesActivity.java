@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,6 +37,7 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
     RoomAdapter roomAdapter;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
+    ArrayList<byte []> roomImages = new ArrayList<>();
 
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
@@ -108,7 +108,7 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         final AddDatesPresenter presenter = new AddDatesPresenter(this);
 
         roomListView = findViewById(R.id.addDatesListView);
-        roomAdapter = new RoomAdapter(getLayoutInflater(), roomStrings);
+        roomAdapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(roomAdapter);
 
         AddDatesSearchThread t1 = new AddDatesSearchThread(myHandler, roomStrings);
@@ -142,4 +142,3 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
-

@@ -16,11 +16,13 @@ import org.json.simple.parser.ParseException;
 public class FilteredSearchThread extends Thread {
     Handler handler;
     ArrayList<String> roomStrings;
+    ArrayList<byte []> roomImages;
     String searchOption;
-    public FilteredSearchThread(Handler handler, ArrayList<String> roomStrings, String searchOption) {
+    public FilteredSearchThread(Handler handler, ArrayList<String> roomStrings, String searchOption, ArrayList<byte []> roomImages) {
         this.handler = handler;
         this.roomStrings = roomStrings;
         this.searchOption = searchOption;
+        this.roomImages = roomImages;
     }
 
     @Override
@@ -32,6 +34,8 @@ public class FilteredSearchThread extends Thread {
             Dao.getOut().flush();
 
             List<String> rooms = (List<String>) Dao.getIn().readObject();
+            List<byte []> roomImagesTemp = (List<byte[]>) Dao.getIn().readObject();
+            roomImages.addAll(roomImagesTemp);
             ArrayList<Room> roomObjects = new ArrayList<>();
 
             for (String room : rooms){

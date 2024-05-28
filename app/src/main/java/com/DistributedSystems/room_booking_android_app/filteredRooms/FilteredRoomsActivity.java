@@ -10,7 +10,6 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -37,6 +36,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     boolean reserveButtonEnabled;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
+    ArrayList<byte []> roomImages = new ArrayList<>();
     RoomAdapter adapter;
     String searchOption = "default search";
 
@@ -114,14 +114,14 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         final FilteredRoomsPresenter presenter = new FilteredRoomsPresenter(this);
 
         roomListView = findViewById(R.id.filteredRooms);
-        adapter = new RoomAdapter(getLayoutInflater(), roomStrings);
+        adapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(adapter);
 
         if (savedInstanceState == null) {
             Intent intent = getIntent();
             searchOption = intent.getStringExtra("searchOption");
         }
-        FilteredSearchThread t1 = new FilteredSearchThread(myHandler, roomStrings, searchOption);
+        FilteredSearchThread t1 = new FilteredSearchThread(myHandler, roomStrings, searchOption, roomImages);
         t1.start();
 
         roomIdText = findViewById(R.id.idEditText);

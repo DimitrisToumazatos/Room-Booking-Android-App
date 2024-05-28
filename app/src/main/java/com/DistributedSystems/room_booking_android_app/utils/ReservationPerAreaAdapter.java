@@ -13,7 +13,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class ReservationPerAreaAdapter extends BaseAdapter {
 
@@ -59,6 +58,5 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
             throw new RuntimeException(e);
         }
         return convertView;
-    }
     }
 }
