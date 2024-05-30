@@ -5,8 +5,12 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
+import com.DistributedSystems.room_booking_android_app.utils.Room;
+
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerReservationsThread extends Thread{

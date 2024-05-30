@@ -41,7 +41,7 @@ public class ManagerReservationsActivity extends AppCompatActivity implements Ma
 
         final ManagerReservationsPresenter presenter = new ManagerReservationsPresenter(this);
 
-        reservationListView = findViewById(R.id.reservationPerAreaList);
+        reservationListView = findViewById(R.id.reservationList);
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 
