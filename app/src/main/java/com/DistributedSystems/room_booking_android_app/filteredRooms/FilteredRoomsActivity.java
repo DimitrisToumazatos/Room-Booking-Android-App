@@ -32,7 +32,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     EditText roomIdText, stDateText, depDateText, customerNameText;
     ListView roomListView;
     String roomId, stDate, depDate, customerName;
-    Button reserveButton;
+    Button reserveButton, exitButtom;
     boolean reserveButtonEnabled;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
@@ -50,7 +50,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
             stDate = ViewUtils.getTextFromEditTextElement(stDateText);
             depDate = ViewUtils.getTextFromEditTextElement(depDateText);
             customerName = ViewUtils.getTextFromEditTextElement(customerNameText);
-            boolean roomIdPassed = true, stDatePassed = true, depDatePassed = true, customerNamePassed = true;
+            boolean roomIdPassed = true, stDatePassed = true, depDatePassed = true;
 
             try{
                 Integer.parseInt(roomId);
@@ -66,7 +66,6 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
                 if(startingDate.isBefore(LocalDate.now())){
                     stDatePassed = false;
                 }
-
             }catch(Exception e){
                 stDatePassed = false;
             }
@@ -80,9 +79,9 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
                 depDatePassed = false;
             }
 
-            customerNamePassed = isAlpha(customerName);
+            boolean customerNamePassed = isAlpha(customerName);
 
-            if((roomId.isEmpty() || stDate.isEmpty() || depDate.isEmpty() || customerName.isEmpty()) && (roomIdPassed && stDatePassed && depDatePassed && customerNamePassed)){
+            if(!(roomId.isEmpty() || stDate.isEmpty() || depDate.isEmpty() || customerName.isEmpty()) && (roomIdPassed && stDatePassed && depDatePassed && customerNamePassed)){
                 reserveButton.setAlpha(1.0f);
                 reserveButtonEnabled = true;
             } else {
@@ -109,7 +108,21 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtered_rooms);
-        Log.d("message","3");
+        roomIdText = findViewById(R.id.idEditText);
+        stDateText = findViewById(R.id.stDateEditText);
+        depDateText = findViewById(R.id.depDateEditText);
+        customerNameText = findViewById(R.id.nameEditText);
+        exitButtom = findViewById(R.id.exitReservation);
+
+        reserveButton = findViewById(R.id.reserveButton);
+        reserveButton.setAlpha(0.5f);
+        reserveButtonEnabled = false;
+
+        roomIdText.addTextChangedListener(inputFieldsWatcher);
+        customerNameText.addTextChangedListener(inputFieldsWatcher);
+        stDateText.addTextChangedListener(inputFieldsWatcher);
+        depDateText.addTextChangedListener(inputFieldsWatcher);
+
 
         final FilteredRoomsPresenter presenter = new FilteredRoomsPresenter(this);
 
@@ -124,23 +137,10 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         FilteredSearchThread t1 = new FilteredSearchThread(myHandler, roomStrings, searchOption, roomImages);
         t1.start();
 
-        roomIdText = findViewById(R.id.idEditText);
-        customerNameText = findViewById(R.id.nameEditText);
-        stDateText = findViewById(R.id.stDateEditText);
-        depDateText = findViewById(R.id.depDateEditText);
 
-        reserveButton = findViewById(R.id.reserveButton);
-        reserveButton.setAlpha(0.5f);
-        reserveButtonEnabled = false;
+        reserveButton.setOnClickListener(v -> presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms));
 
-        roomIdText.addTextChangedListener(inputFieldsWatcher);
-        customerNameText.addTextChangedListener(inputFieldsWatcher);
-        stDateText.addTextChangedListener(inputFieldsWatcher);
-        depDateText.addTextChangedListener(inputFieldsWatcher);
-
-        findViewById(R.id.reserveButton).setOnClickListener(v -> presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms));
-
-        findViewById(R.id.exitReservation).setOnClickListener(v -> presenter.onExit());
+        exitButtom.setOnClickListener(v -> presenter.onExit());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

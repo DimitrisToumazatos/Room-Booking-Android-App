@@ -46,9 +46,13 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
 
         final ReservationsPerAreaPresenter presenter = new ReservationsPerAreaPresenter(this);
 
-        reservationListView = findViewById(R.id.reservationList);
-        stDate = String.valueOf((EditText) findViewById(R.id.startingDateText));
-        depDate = String.valueOf((EditText) findViewById(R.id.departureDateText));
+        if (savedInstanceState == null) {
+            Intent intent = getIntent();
+            stDate = intent.getStringExtra("startDate");
+            depDate = intent.getStringExtra("depDate");
+        }
+
+        reservationListView = findViewById(R.id.reservationPerAreaList);
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 

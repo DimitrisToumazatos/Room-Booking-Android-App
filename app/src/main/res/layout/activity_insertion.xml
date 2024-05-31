@@ -167,40 +167,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/image"
-        android:layout_width="311dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Please place the image you want in the folder java/com/DistributedSystems/domain/images and type the name of the photo below:"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/areaText" />
 
-    <EditText
-        android:id="@+id/imageText"
-        android:layout_width="313dp"
-        android:layout_height="63dp"
-        android:ems="10"
-        android:hint="ImageExample.png"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/image"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
+
+
+    <ImageView
+        android:id="@+id/roomImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertionText"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <Button
-        android:id="@+id/insert_button"
+        android:id="@+id/insertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Insert Room"
+        app:layout_constraintEnd_toEndOf="@+id/roomButtonImage"
+        app:layout_constraintStart_toStartOf="@+id/roomButtonImage"
+        app:layout_constraintTop_toBottomOf="@+id/roomButtonImage" />
+
+    <Button
+        android:id="@+id/roomButtonImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Insert Room"
-        app:layout_constraintEnd_toEndOf="@+id/imageText"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/imageText"
-        app:layout_constraintTop_toBottomOf="@+id/imageText"
-        tools:ignore="MissingConstraints" />
+        android:text="Upload Image"
+        app:layout_constraintEnd_toEndOf="@+id/roomImage"
+        app:layout_constraintStart_toStartOf="@+id/roomImage"
+        app:layout_constraintTop_toBottomOf="@+id/roomImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

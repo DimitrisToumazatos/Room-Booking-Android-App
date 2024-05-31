@@ -111,7 +111,7 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         roomAdapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(roomAdapter);
 
-        AddDatesSearchThread t1 = new AddDatesSearchThread(myHandler, roomStrings);
+        AddDatesSearchThread t1 = new AddDatesSearchThread(myHandler, roomStrings, roomImages);
         t1.start();
 
         roomIdText = findViewById(R.id.roomIdText);

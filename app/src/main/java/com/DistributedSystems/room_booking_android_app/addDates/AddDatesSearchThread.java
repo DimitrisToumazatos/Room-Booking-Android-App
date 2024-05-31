@@ -16,9 +16,12 @@ import java.util.List;
 public class AddDatesSearchThread extends Thread {
     Handler handler;
     ArrayList<String> roomStrings;
-    public AddDatesSearchThread(Handler handler, ArrayList<String> roomStrings){
+
+    List<byte[]> roomImages;
+    public AddDatesSearchThread(Handler handler, ArrayList<String> roomStrings, List<byte[]> roomImages ){
         this.handler = handler;
         this.roomStrings = roomStrings;
+        this.roomImages = roomImages;
     }
 
     @Override
@@ -29,14 +32,14 @@ public class AddDatesSearchThread extends Thread {
             Dao.getOut().writeObject("default search");
             Dao.getOut().flush();
 
-            List<String> rooms = (List<String>) Dao.getIn().readObject();
+            roomStrings.addAll((List<String>) Dao.getIn().readObject());
+            roomImages.addAll((List<byte[]>) Dao.getIn().readObject());
+
             ArrayList<Room> roomObjects = new ArrayList<>();
 
-            for (String room : rooms){
+            for (String room : roomStrings){
                 roomObjects.add(new Room(room));
             }
-
-            roomStrings.addAll(rooms);
 
             Message msg = new Message();
             Bundle bundle = new Bundle();

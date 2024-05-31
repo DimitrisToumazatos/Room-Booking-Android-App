@@ -16,15 +16,14 @@ public class ReservationsPerAreaThread extends Thread{
 
     Handler handler;
     List<String> reservationStrings;
-    LocalDate stDate;
-    LocalDate depDate;
+    String stDate;
+    String depDate;
 
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public ReservationsPerAreaThread(Handler handler, List<String> reservationStrings, String stDate, String depDate) {
         this.handler = handler;
         this.reservationStrings = reservationStrings;
-        this.stDate = LocalDate.parse(stDate, formatter);
-        this.depDate = LocalDate.parse(depDate, formatter);
+        this.stDate = stDate;
+        this.depDate = depDate;
     }
 
     public void run() {

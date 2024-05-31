@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.DistributedSystems.room_booking_android_app.datePerArea.DatesPerAreaActivity;
 import com.DistributedSystems.room_booking_android_app.managerReservations.ManagerReservationsActivity;
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.addDates.AddDatesActivity;
@@ -70,7 +71,7 @@ public class ManagerConnectionActivity extends AppCompatActivity implements Mana
     }
 
     public void getReservationsPerArea(){
-        Intent intent = new Intent(ManagerConnectionActivity.this, ReservationsPerAreaActivity.class);
+        Intent intent = new Intent(ManagerConnectionActivity.this, DatesPerAreaActivity.class);
         startActivity(intent);
     }
 

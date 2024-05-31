@@ -63,7 +63,7 @@ public class RoomAdapter extends BaseAdapter {
         TextView toTextView = (TextView) convertView.findViewById(R.id.to);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.roomImage);
 
-        ArrayList<ArrayList<LocalDate>> availableDates = new ArrayList<>();
+        ArrayList<ArrayList<String>> availableDates = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
@@ -76,9 +76,9 @@ public class RoomAdapter extends BaseAdapter {
             capacityTextView.setText((Long.toString((Long) json.get("noOfPersons"))));
             starsTextView.setText((Long.toString((Long) json.get("stars"))));
             noOfReviewsTextView.setText((Long.toString((Long) json.get("noOfReviews"))));
-            availableDates = (ArrayList<ArrayList<LocalDate>>) json.get("availableDates");
-            fromTextView.setText((availableDates.get(0).get(0)).format(formatter));
-            toTextView.setText((availableDates.get(0).get(1)).format(formatter));
+            availableDates = (ArrayList<ArrayList<String>>) json.get("availableDates");
+            fromTextView.setText(availableDates.get(0).get(0));
+            toTextView.setText(availableDates.get(0).get(1));
 
             Bitmap bmp = BitmapFactory.decodeByteArray(roomImages.get(position), 0, roomImages.get(position).length);
             imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, 130, 130, false));

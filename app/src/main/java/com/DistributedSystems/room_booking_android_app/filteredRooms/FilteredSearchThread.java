@@ -34,8 +34,7 @@ public class FilteredSearchThread extends Thread {
             Dao.getOut().flush();
 
             List<String> rooms = (List<String>) Dao.getIn().readObject();
-            List<byte []> roomImagesTemp = (List<byte[]>) Dao.getIn().readObject();
-            roomImages.addAll(roomImagesTemp);
+            roomImages.addAll((List<byte[]>) Dao.getIn().readObject());
             ArrayList<Room> roomObjects = new ArrayList<>();
 
             for (String room : rooms){

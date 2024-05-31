@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary95"
+    >
+
+    <TextView
+        android:id="@+id/stDate"
+        android:layout_width="111dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="68dp"
+        android:text="Starting Date:"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/datesMSG"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/datesMSG"
+        app:layout_constraintTop_toBottomOf="@+id/datesMSG" />
+
+    <TextView
+        android:id="@+id/depDate"
+        android:layout_width="123dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="12dp"
+        android:text="Departure Date:"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startingDateEditText" />
+
+    <EditText
+        android:id="@+id/startingDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stDate" />
+
+    <EditText
+        android:id="@+id/departureDateEditText"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/depDate" />
+
+    <Button
+        android:id="@+id/searchReservarionsButton"
+        android:layout_width="132dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="80dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/departureDateEditText" />
+
+    <TextView
+        android:id="@+id/datesMSG"
+        android:layout_width="266dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="serif"
+        android:text="              Give date for search.📅"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,17 @@
 package com.DistributedSystems.room_booking_android_app.insertion;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.text.TextWatcher;
 
@@ -27,8 +32,10 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
     EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText, roomImageText;
     String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity, roomImage;
-    Button insertButton;
+    Button insertButton,roomButtonImage;
+    ImageView image;
     Boolean insertButtonEnabled;
+    Bitmap bitmap;
     TextWatcher inputFieldsWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -41,7 +48,6 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
             roomPrice = ViewUtils.getTextFromEditTextElement(roomPriceText);
             roomArea = ViewUtils.getTextFromEditTextElement(roomAreaText);
             roomCapacity = ViewUtils.getTextFromEditTextElement(roomCapacityText);
-            roomImage = ViewUtils.getTextFromEditTextElement(roomImageText);
             roomStDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
             roomDepDate = ViewUtils.getTextFromEditTextElement(roomDepDateText);
             boolean roomPricePassed = true, roomCapacityPassed = true, roomStDatePassed = true, roomDepDatePassed = true, roomNamePassed = true;
@@ -80,7 +86,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
             roomNamePassed = isAlpha(roomName);
 
-            if (!(roomName.isEmpty() || roomArea.isEmpty() || roomImage.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) && (roomPricePassed && roomDepDatePassed && roomStDatePassed && roomCapacityPassed && roomNamePassed)) {
+            if (!(roomName.isEmpty() || roomArea.isEmpty() || roomPrice.isEmpty() || roomCapacity.isEmpty() || roomStDate.isEmpty() || roomDepDate.isEmpty()) && (roomPricePassed && roomDepDatePassed && roomStDatePassed && roomCapacityPassed && roomNamePassed)) {
                 insertButton.setAlpha(1.0f);
                 insertButtonEnabled = true;
             } else {
@@ -94,6 +100,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         }
     };
 
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertion);
@@ -104,11 +111,13 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomPriceText = findViewById(R.id.priceText);
         roomAreaText = findViewById(R.id.areaText);
         roomCapacityText = findViewById(R.id.personsText);
-        roomImageText = findViewById(R.id.imageText);
+        roomButtonImage = findViewById(R.id.roomButtonImage);
         roomStDateText = findViewById(R.id.startingDateText);
         roomDepDateText = findViewById(R.id.departureDateText);
+        image = findViewById(R.id.roomImage);
+        image.setAlpha(0.0f);
 
-        insertButton = findViewById(R.id.insert_button);
+        insertButton = findViewById(R.id.insertButton);
         insertButton.setAlpha(0.5f);
         insertButtonEnabled = false;
 
@@ -116,18 +125,21 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomPriceText.addTextChangedListener(inputFieldsWatcher);
         roomAreaText.addTextChangedListener(inputFieldsWatcher);
         roomCapacityText.addTextChangedListener(inputFieldsWatcher);
-        roomImageText.addTextChangedListener(inputFieldsWatcher);
         roomStDateText.addTextChangedListener(inputFieldsWatcher);
         roomDepDateText.addTextChangedListener(inputFieldsWatcher);
 
-        insertButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
+        roomButtonImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-                    presenter.onInsertRoom(roomName, roomArea, roomImage, roomPrice, roomCapacity, roomStDate, roomDepDate, insertButtonEnabled);
-                } catch (IOException | JSONException e) {
-                    throw new RuntimeException(e);
-                }
+                Intent iGallery =  new Intent(Intent.ACTION_PICK);
+                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(iGallery, 1000);
+            }
+        });
+        insertButton.setOnClickListener(v -> {
+            try {
+                presenter.onInsertRoom(roomName, roomArea, roomPrice, roomCapacity, roomStDate, roomDepDate, insertButtonEnabled, bitmap);
+            } catch (IOException | JSONException e) {
+                throw new RuntimeException(e);
             }
         });
     }
@@ -139,6 +151,18 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode==1000){
+            image.setImageURI(data.getData());
+            image.getLayoutParams().height = 250;
+            image.getLayoutParams().width = 400;
+            image.setAlpha(1.0f);
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) image.getDrawable();
+            bitmap = bitmapDrawable.getBitmap();
+        }
     }
 
     public boolean isAlpha(String name) {

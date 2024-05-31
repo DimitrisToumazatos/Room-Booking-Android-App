@@ -15,6 +15,9 @@
         android:theme="@style/Theme.RoomBookingAndroidApp"
         tools:targetApi="31">
         <activity
+            android:name=".datePerArea.DatesPerAreaActivity"
+            android:exported="false"/>
+        <activity
             android:name=".filteredRooms.FilteredRoomsActivity"
             android:exported="false"/>
         <activity

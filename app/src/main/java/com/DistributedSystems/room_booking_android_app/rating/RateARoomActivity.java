@@ -75,6 +75,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         }
     };
 
+
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
@@ -95,7 +96,7 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(adapter);
 
-        RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings);
+        RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings, roomImages);
         t1.start();
 
         roomIdText = findViewById(R.id.roomIdText);

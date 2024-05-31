@@ -1,5 +1,6 @@
 package com.DistributedSystems.room_booking_android_app.utils;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ReservationPerAreaAdapter extends BaseAdapter {
 
     HashMap<String, Integer> reservationsPerArea;
     LayoutInflater inflater;
-    JSONParser parser;
 
     public ReservationPerAreaAdapter(LayoutInflater inflater, HashMap<String, Integer> reservationsPerArea){
         this.inflater = inflater;
@@ -39,6 +40,7 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -48,15 +50,21 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
         TextView nameTextView = (TextView) convertView.findViewById(R.id.customerName);
         TextView areaCountTextView = (TextView) convertView.findViewById(R.id.startDate);
 
-        try {
-            JSONObject json = (JSONObject) parser.parse(String.valueOf(reservationsPerArea.get(position)));
-
-            nameTextView.setText((String) json.get("areaName"));
-            areaCountTextView.setText((String) json.get("count"));
-
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        Map.Entry<String, Integer> entry = searchMap(position);
+        nameTextView.setText(entry.getKey());
+        areaCountTextView.setText(entry.getValue().toString());
         return convertView;
+    }
+
+    public Map.Entry<String, Integer> searchMap(int position){
+
+        int count=0;
+        for(Map.Entry<String, Integer> entry: reservationsPerArea.entrySet()){
+            if (count==position-1){
+                return entry;
+            }
+            count++;
+        }
+        return null;
     }
 }
