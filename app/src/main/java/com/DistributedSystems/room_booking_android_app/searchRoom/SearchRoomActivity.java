@@ -41,7 +41,7 @@ public class SearchRoomActivity extends AppCompatActivity implements SearchRoomV
 
         searchButton = findViewById(R.id.search_button);
 
-        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             public void onClick(View v) {
                 try {

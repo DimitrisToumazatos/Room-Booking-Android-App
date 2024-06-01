@@ -10,4 +10,5 @@ public interface ManagerConnectionView {
     void getReservationsPerArea();
 
     void onExitButton();
+    void showToast(String message);
 }

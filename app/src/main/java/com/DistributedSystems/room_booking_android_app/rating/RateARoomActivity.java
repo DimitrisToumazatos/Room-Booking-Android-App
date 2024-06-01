@@ -90,19 +90,20 @@ public class RateARoomActivity extends AppCompatActivity implements RateARoomVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
 
+        roomIdText = findViewById(R.id.roomIdText);
+        ratingText = findViewById(R.id.ratingText);
+        rateRoomButton = findViewById(R.id.rating_button);
+        roomListView = findViewById(R.id.rateListView);
+
         final RateARoomPresenter presenter = new RateARoomPresenter(this);
 
-        roomListView = findViewById(R.id.rateListView);
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(adapter);
 
         RateRoomSearchThread t1 = new RateRoomSearchThread(myHandler, roomStrings, roomImages);
         t1.start();
 
-        roomIdText = findViewById(R.id.roomIdText);
-        ratingText = findViewById(R.id.ratingText);
 
-        rateRoomButton = findViewById(R.id.rating_button);
         rateRoomButton.setAlpha(0.5f);
         rateRoomButtonEnabled = false;
 

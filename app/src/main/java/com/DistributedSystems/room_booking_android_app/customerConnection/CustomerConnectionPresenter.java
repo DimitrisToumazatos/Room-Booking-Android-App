@@ -11,5 +11,8 @@ public class CustomerConnectionPresenter {
 
     public void onSearchButton() {view.searchButton();}
 
-    public void onExitButton() {view.exitButton();}
+    public void onExitButton() {
+        view.showToast("Exit");
+        view.exitButton();
+    }
 }

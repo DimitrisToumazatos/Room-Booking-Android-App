@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,8 +29,8 @@ import java.time.format.DateTimeFormatter;
 
 public class InsertRoomActivity extends AppCompatActivity implements InsertRoomView {
 
-    EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText, roomImageText;
-    String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity, roomImage;
+    EditText roomNameText, roomPriceText, roomStDateText, roomDepDateText, roomAreaText,roomCapacityText;
+    String roomName, roomPrice, roomStDate, roomDepDate, roomArea, roomCapacity;
     Button insertButton,roomButtonImage;
     ImageView image;
     Boolean insertButtonEnabled;
@@ -50,7 +49,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
             roomCapacity = ViewUtils.getTextFromEditTextElement(roomCapacityText);
             roomStDate = ViewUtils.getTextFromEditTextElement(roomStDateText);
             roomDepDate = ViewUtils.getTextFromEditTextElement(roomDepDateText);
-            boolean roomPricePassed = true, roomCapacityPassed = true, roomStDatePassed = true, roomDepDatePassed = true, roomNamePassed = true;
+            boolean roomPricePassed = true, roomCapacityPassed = true, roomStDatePassed = true, roomDepDatePassed = true, roomNamePassed;
             try{
                 Integer.parseInt(roomPrice);
             }catch (Exception e){
@@ -100,6 +99,7 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,12 +128,10 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
         roomStDateText.addTextChangedListener(inputFieldsWatcher);
         roomDepDateText.addTextChangedListener(inputFieldsWatcher);
 
-        roomButtonImage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent iGallery =  new Intent(Intent.ACTION_PICK);
-                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(iGallery, 1000);
-            }
+        roomButtonImage.setOnClickListener(v -> {
+            Intent iGallery =  new Intent(Intent.ACTION_PICK);
+            iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(iGallery, 1000);
         });
         insertButton.setOnClickListener(v -> {
             try {
@@ -176,5 +174,4 @@ public class InsertRoomActivity extends AppCompatActivity implements InsertRoomV
 
         return true;
     }
-
 }

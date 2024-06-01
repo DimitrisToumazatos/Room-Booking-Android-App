@@ -1,5 +1,9 @@
 package com.DistributedSystems.room_booking_android_app.datePerArea;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,6 +12,7 @@ public class DatesPerAreaPresenter {
 
     public DatesPerAreaPresenter(DatesPerAreaView view){this.view = view; }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void onSearchReservations(String roomStDate, String roomDepDate, Boolean searchButtonEnabled) {
         String ERROR_EMPTY_FIELD_MSG = "Please fill all the given fields";
         String ERROR_DATE_PASSED_MSG = "The date you chose has passed!";

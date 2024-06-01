@@ -27,8 +27,6 @@ public class AddDatesSearchThread extends Thread {
     @Override
     public void run(){
         try {
-            Dao.getOut().writeInt(21);
-            Dao.getOut().flush();
             Dao.getOut().writeObject("default search");
             Dao.getOut().flush();
 

@@ -19,7 +19,7 @@ import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 public class HomepageActivity extends AppCompatActivity implements HomepageView {
     String managerName;
     EditText managerNameText;
-    Button managerButton, clientButton, exitButton;
+    Button managerButton, clientButton;
     boolean managerButtonEnabled;
 
     TextWatcher inputFieldsWatcher = new TextWatcher() {
@@ -51,15 +51,16 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        managerNameText = findViewById(R.id.managerNameText);
+        clientButton = findViewById(R.id.home_customer_button);
+
+        managerButton = findViewById(R.id.home_manager_button);
+        managerButtonEnabled = false;
+        managerButton.setAlpha(0.5f);
+
         final HomepagePresenter presenter = new HomepagePresenter(this);
 
         new InitializeConnectionThread().start();
-        managerNameText = findViewById(R.id.managerNameText);
-
-        managerButton = findViewById(R.id.home_manager_button);
-        clientButton = findViewById(R.id.home_customer_button);
-        managerButtonEnabled = false;
-        managerButton.setAlpha(0.5f);
 
         managerNameText.addTextChangedListener(inputFieldsWatcher);
 

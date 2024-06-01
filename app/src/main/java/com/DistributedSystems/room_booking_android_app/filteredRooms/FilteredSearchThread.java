@@ -28,20 +28,16 @@ public class FilteredSearchThread extends Thread {
     @Override
     public void run() {
         try {
-            Dao.getOut().writeInt(11);
-            Dao.getOut().flush();
             Dao.getOut().writeObject(searchOption);
             Dao.getOut().flush();
 
-            List<String> rooms = (List<String>) Dao.getIn().readObject();
+            roomStrings.addAll((List<String>) Dao.getIn().readObject());
             roomImages.addAll((List<byte[]>) Dao.getIn().readObject());
             ArrayList<Room> roomObjects = new ArrayList<>();
 
-            for (String room : rooms){
+            for (String room : roomStrings){
                 roomObjects.add(new Room(room));
             }
-
-            roomStrings.addAll(rooms);
 
             Message msg = new Message();
             Bundle bundle = new Bundle();

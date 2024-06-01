@@ -9,10 +9,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -32,7 +32,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     EditText roomIdText, stDateText, depDateText, customerNameText;
     ListView roomListView;
     String roomId, stDate, depDate, customerName;
-    Button reserveButton, exitButtom;
+    Button reserveButton, exitButton;
     boolean reserveButtonEnabled;
     ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
@@ -98,21 +98,24 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            rooms = (ArrayList<Room>) message.getData().getSerializable("Rooms");
+            rooms.addAll((ArrayList<Room>) message.getData().getSerializable("Rooms"));
             adapter.notifyDataSetChanged();
             return false;
         }
     });
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtered_rooms);
+
         roomIdText = findViewById(R.id.idEditText);
         stDateText = findViewById(R.id.stDateEditText);
         depDateText = findViewById(R.id.depDateEditText);
         customerNameText = findViewById(R.id.nameEditText);
-        exitButtom = findViewById(R.id.exitReservation);
+        exitButton = findViewById(R.id.exitReservation);
+        roomListView = findViewById(R.id.filteredRooms);
 
         reserveButton = findViewById(R.id.reserveButton);
         reserveButton.setAlpha(0.5f);
@@ -126,7 +129,6 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
 
         final FilteredRoomsPresenter presenter = new FilteredRoomsPresenter(this);
 
-        roomListView = findViewById(R.id.filteredRooms);
         adapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(adapter);
 
@@ -138,9 +140,9 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
         t1.start();
 
 
-        reserveButton.setOnClickListener(v -> presenter.onReserveButton(roomId, stDate, depDate, customerName, reserveButtonEnabled, rooms));
+        reserveButton.setOnClickListener(v -> presenter.onReserveButton(roomId, stDate, depDate, reserveButtonEnabled, rooms));
 
-        exitButtom.setOnClickListener(v -> presenter.onExit());
+        exitButton.setOnClickListener(v -> presenter.onExit());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -151,7 +153,8 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     }
 
     public void exitButton() {
-        new ExitReservationThread().start();
+        ReservationsExitCodeThread t1 = new ReservationsExitCodeThread();
+        t1.start();
         Intent intent = new Intent(FilteredRoomsActivity.this, CustomerConnectionActivity.class);
         startActivity(intent);
     }
@@ -170,6 +173,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
 
     @Override
     public void showToast(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
 }

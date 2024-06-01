@@ -1,18 +1,18 @@
 package com.DistributedSystems.room_booking_android_app.datePerArea;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
-import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
 import com.DistributedSystems.room_booking_android_app.reservationsPerArea.ReservationsPerAreaActivity;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
@@ -30,6 +30,7 @@ public class DatesPerAreaActivity extends AppCompatActivity implements DatesPerA
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             stDate = ViewUtils.getTextFromEditTextElement(roomStDate);
             depDate = ViewUtils.getTextFromEditTextElement(roomDepDate);
@@ -71,6 +72,7 @@ public class DatesPerAreaActivity extends AppCompatActivity implements DatesPerA
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dates_per_area);
@@ -87,14 +89,14 @@ public class DatesPerAreaActivity extends AppCompatActivity implements DatesPerA
 
         final DatesPerAreaPresenter presenter = new DatesPerAreaPresenter(this);
 
-        findViewById(R.id.searchReservarionsButton).setOnClickListener(v -> presenter.onSearchReservations(stDate, depDate, searchButtonEnabled));
+        search.setOnClickListener(v -> presenter.onSearchReservations(stDate, depDate, searchButtonEnabled));
 
     }
 
     public void searchReservations() {
         Intent intent = new Intent(DatesPerAreaActivity.this, ReservationsPerAreaActivity.class);
-        intent.putExtra("startDate", stDate.toString());
-        intent.putExtra("depDate", depDate.toString());
+        intent.putExtra("startDate", stDate);
+        intent.putExtra("depDate", depDate);
         startActivity(intent);
     }
 

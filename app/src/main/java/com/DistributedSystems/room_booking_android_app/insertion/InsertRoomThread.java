@@ -18,9 +18,6 @@ public class InsertRoomThread extends Thread {
     @Override
     public void run() {
         try {
-            Dao.getOut().writeInt(1);
-            Dao.getOut().flush();
-
             Dao.getOut().writeObject(this.json);
             Dao.getOut().flush();
 

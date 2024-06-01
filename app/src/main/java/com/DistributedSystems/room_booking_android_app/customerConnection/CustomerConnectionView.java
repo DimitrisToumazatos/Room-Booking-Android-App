@@ -6,4 +6,6 @@ public interface CustomerConnectionView {
     void searchButton();
 
     void exitButton();
+
+    void showToast(String message);
 }

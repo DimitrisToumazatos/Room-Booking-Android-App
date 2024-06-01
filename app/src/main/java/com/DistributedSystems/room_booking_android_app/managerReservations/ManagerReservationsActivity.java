@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +23,7 @@ import java.util.List;
 public class ManagerReservationsActivity extends AppCompatActivity implements ManagerReservationsView {
 
     ReservationAdapter adapter;
+    Button exitButton;
     ListView reservationListView;
     List<String> reservationStrings = new ArrayList<>();
 
@@ -39,19 +40,17 @@ public class ManagerReservationsActivity extends AppCompatActivity implements Ma
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
+        exitButton = findViewById(R.id.reservationListExitButton);
+        reservationListView = findViewById(R.id.reservationList);
+
         final ManagerReservationsPresenter presenter = new ManagerReservationsPresenter(this);
 
-        reservationListView = findViewById(R.id.reservationList);
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 
         new ManagerReservationsThread(myHandler, reservationStrings).start();
 
-        findViewById(R.id.reservationListExitButton).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                presenter.onExit();
-            }
-        });
+        exitButton.setOnClickListener(v -> presenter.onExit());
     }
 
     public void exit() {

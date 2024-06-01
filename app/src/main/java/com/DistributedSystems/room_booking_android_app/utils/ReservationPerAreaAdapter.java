@@ -9,10 +9,6 @@ import android.widget.TextView;
 
 import com.DistributedSystems.room_booking_android_app.R;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,8 +43,8 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_res_list, parent, false);
         }
 
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.customerName);
-        TextView areaCountTextView = (TextView) convertView.findViewById(R.id.startDate);
+        TextView nameTextView = convertView.findViewById(R.id.customerName);
+        TextView areaCountTextView = convertView.findViewById(R.id.startDate);
 
         Map.Entry<String, Integer> entry = searchMap(position);
         nameTextView.setText(entry.getKey());

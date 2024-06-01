@@ -20,11 +20,6 @@ public class RateARoomPresenter {
         String ERROR_BOTH_TEXTS_WRONG = "Please give a correct room id and rating";
         String SUCCESSFUL_RATING_COMMIT = "Your rating has been committed successfully";
 
-        if (!rateRoomButtonEnabled) {
-            view.showToast(ERROR_EMPTY_FIELD_MSG);
-            return;
-        }
-
         int localRating = Integer.parseInt(rating);
 
         int roomIdInteger = Integer.parseInt(roomId);
@@ -36,17 +31,20 @@ public class RateARoomPresenter {
             }
         }
 
-        if (!found && (localRating <=0 || localRating >=6)) {
-            view.showToast(ERROR_BOTH_TEXTS_WRONG);
-        }else if (!found){
-            view.showToast(ERROR_INVALID_ROOM_ID);
+        if (!rateRoomButtonEnabled) {
+            if (!found && (localRating <= 0 || localRating >= 6)) {
+                view.showToast(ERROR_BOTH_TEXTS_WRONG);
+            } else if (!found) {
+                view.showToast(ERROR_INVALID_ROOM_ID);
+            } else if (localRating <= 0 || localRating >= 6) {
+                view.showToast(ERROR_INVALID_RATING_MSG);
+            } else {
+                view.showToast(ERROR_EMPTY_FIELD_MSG);
+            }
+            return;
         }
-        else if (localRating <=0 || localRating >=6){
-            view.showToast(ERROR_INVALID_RATING_MSG);
-        }
-        else{
-            view.showToast(SUCCESSFUL_RATING_COMMIT);
-            view.rateRoom();
-        }
+        view.showToast(SUCCESSFUL_RATING_COMMIT);
+        view.rateRoom();
+
     }
 }

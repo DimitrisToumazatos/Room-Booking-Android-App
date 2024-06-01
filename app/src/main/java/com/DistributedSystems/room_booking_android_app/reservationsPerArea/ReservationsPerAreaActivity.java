@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -22,9 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationsPerAreaActivity extends AppCompatActivity implements ReservationsPerAreaView {
-    String managerName;
-    EditText managerText;
-
+    Button exitButton;
     ReservationAdapter adapter;
     ListView reservationListView;
     String stDate;
@@ -44,6 +40,9 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationsperarea);
 
+        reservationListView = findViewById(R.id.reservationPerAreaList);
+        exitButton = findViewById(R.id.reservationPerAreaExitButton);
+
         final ReservationsPerAreaPresenter presenter = new ReservationsPerAreaPresenter(this);
 
         if (savedInstanceState == null) {
@@ -52,14 +51,13 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
             depDate = intent.getStringExtra("depDate");
         }
 
-        reservationListView = findViewById(R.id.reservationPerAreaList);
         adapter = new ReservationAdapter(getLayoutInflater(), reservationStrings);
         reservationListView.setAdapter(adapter);
 
         ReservationsPerAreaThread t1 = new ReservationsPerAreaThread(myHandler, reservationStrings, stDate, depDate);
         t1.start();
 
-        findViewById(R.id.reservationPerAreaExitButton).setOnClickListener(v -> presenter.onExit());
+        exitButton.setOnClickListener(v -> presenter.onExit());
 
     }
 

@@ -2,6 +2,7 @@ package com.DistributedSystems.room_booking_android_app.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import com.DistributedSystems.room_booking_android_app.R;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,26 +48,25 @@ public class RoomAdapter extends BaseAdapter {
         return 0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.activity_item_list, parent, false);
         }
 
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.roomName);
-        TextView idTextView = (TextView) convertView.findViewById(R.id.roomId);
-        TextView priceTextView = (TextView) convertView.findViewById(R.id.price);
-        TextView areaTextView = (TextView) convertView.findViewById(R.id.area);
-        TextView capacityTextView = (TextView) convertView.findViewById(R.id.capacity);
-        TextView starsTextView = (TextView) convertView.findViewById(R.id.stars);
-        TextView noOfReviewsTextView = (TextView) convertView.findViewById(R.id.noOfReviews);
-        TextView fromTextView = (TextView) convertView.findViewById(R.id.from);
-        TextView toTextView = (TextView) convertView.findViewById(R.id.to);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.roomImage);
+        TextView nameTextView =  convertView.findViewById(R.id.roomName);
+        TextView idTextView =  convertView.findViewById(R.id.roomId);
+        TextView priceTextView =  convertView.findViewById(R.id.price);
+        TextView areaTextView =  convertView.findViewById(R.id.area);
+        TextView capacityTextView = convertView.findViewById(R.id.capacity);
+        TextView starsTextView =  convertView.findViewById(R.id.stars);
+        TextView noOfReviewsTextView =  convertView.findViewById(R.id.noOfReviews);
+        TextView fromTextView =  convertView.findViewById(R.id.from);
+        TextView toTextView =  convertView.findViewById(R.id.to);
+        ImageView imageView =  convertView.findViewById(R.id.roomImage);
 
-        ArrayList<ArrayList<String>> availableDates = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+        ArrayList<ArrayList<String>> availableDates;
         try {
             JSONObject json = (JSONObject) parser.parse(roomStrings.get(position));
 

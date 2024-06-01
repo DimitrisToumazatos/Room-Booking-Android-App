@@ -100,25 +100,26 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datesaddition);
 
+        roomIdText = findViewById(R.id.roomIdText);
+        startingDateText = findViewById(R.id.startingDateText);
+        departureDateText = findViewById(R.id.departureDateText);
+        roomListView = findViewById(R.id.addDatesListView);
+        addDatesButton = findViewById(R.id.add_dates_button);
+
         final AddDatesPresenter presenter = new AddDatesPresenter(this);
 
-        roomListView = findViewById(R.id.addDatesListView);
         roomAdapter = new RoomAdapter(getLayoutInflater(), roomStrings, roomImages);
         roomListView.setAdapter(roomAdapter);
 
         AddDatesSearchThread t1 = new AddDatesSearchThread(myHandler, roomStrings, roomImages);
         t1.start();
 
-        roomIdText = findViewById(R.id.roomIdText);
-        startingDateText = findViewById(R.id.startingDateText);
-        departureDateText = findViewById(R.id.departureDateText);
-
-        addDatesButton = findViewById(R.id.add_dates_button);
         addDatesButton.setAlpha(0.5f);
         addDatesButtonEnabled = false;
 
@@ -126,14 +127,12 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         startingDateText.addTextChangedListener(inputFieldsWatcher);
         departureDateText.addTextChangedListener(inputFieldsWatcher);
 
-        addDatesButton.setOnClickListener(v -> presenter.onAddDates(roomId, startingDate, departureDate, addDatesButtonEnabled));
+        addDatesButton.setOnClickListener(v -> presenter.onAddDates( startingDate, departureDate, addDatesButtonEnabled));
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDates() {
-        AddDatesThread t2 = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            t2 = new AddDatesThread(roomId, startingDate, departureDate);
-            t2.start();
-        }
+        AddDatesThread t2 = new AddDatesThread(roomId, startingDate, departureDate);
+        t2.start();
         Intent intent = new Intent(AddDatesActivity.this, ManagerConnectionActivity.class);
         startActivity(intent);
     }
