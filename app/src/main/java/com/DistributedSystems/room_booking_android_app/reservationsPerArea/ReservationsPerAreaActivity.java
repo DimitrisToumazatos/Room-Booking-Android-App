@@ -34,7 +34,7 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
         @Override
         public boolean handleMessage(@NonNull Message message) {
             reservationStrings.putAll((HashMap<String, Integer>) message.getData().getSerializable("reservationStrings"));
-            Log.d("poutsa2323", reservationStrings.toString());
+
             adapter.notifyDataSetChanged();
             return false;
         }

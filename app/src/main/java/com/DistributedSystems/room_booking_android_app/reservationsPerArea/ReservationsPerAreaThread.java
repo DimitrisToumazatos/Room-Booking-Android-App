@@ -31,7 +31,6 @@ public class ReservationsPerAreaThread extends Thread{
 
         try {
             Dao.getOut().writeObject(stDate);
-            Log.d("poutsa1", stDate);
             Dao.getOut().flush();
             Dao.getOut().writeObject(depDate);
             Dao.getOut().flush();
@@ -39,7 +38,7 @@ public class ReservationsPerAreaThread extends Thread{
             ///TODO:::Nomizo mitso ksexasame na to teleiosoume auto
             HashMap<String, Integer> reservations = (HashMap<String, Integer>)Dao.getIn().readObject();
             reservationStrings.putAll(reservations);
-            Log.d( "poutsa2", reservationStrings.toString());
+
             Message msg = new Message();
             Bundle bundle = new Bundle();
             bundle.putSerializable("reservations", reservationStrings);

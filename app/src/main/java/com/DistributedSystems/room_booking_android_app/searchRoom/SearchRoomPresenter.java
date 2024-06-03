@@ -46,12 +46,7 @@ public class SearchRoomPresenter {
             if (area.isEmpty()){
                 filtersJson.put("area", "-");
             }else{
-                if(isAlpha(area)){
                     filtersJson.put("area", area);
-                }else{
-                    view.showToast(ERROR_AREA_NOT_STRING);
-                    return;
-                }
             }
 
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -122,13 +117,13 @@ public class SearchRoomPresenter {
                 filtersJson.put("persons", localPersons);
             }
 
-            int localStartPrice, localEndPrice;
+            Long localStartPrice, localEndPrice;
             if (startPrice.isEmpty() && endPrice.isEmpty()){
                 filtersJson.put("Starting price", -1);
                 filtersJson.put("Final price", -1);
             }else{
                 try {
-                     localStartPrice = Integer.parseInt(startPrice);
+                    localStartPrice = Long.valueOf(startPrice);
                 }catch(Exception e){
                     view.showToast(ERROR_START_PRICE_NOT_NUMERICAL);
                     return;
@@ -142,7 +137,7 @@ public class SearchRoomPresenter {
                 filtersJson.put("Starting price", localStartPrice);
 
                 try{
-                    localEndPrice = Integer.parseInt(endPrice);
+                    localEndPrice = Long.valueOf(endPrice);
                 }catch(Exception e){
                     view.showToast(ERROR_END_PRICE_NOT_NUMERICAL);
                     return;
@@ -153,7 +148,7 @@ public class SearchRoomPresenter {
                     return;
                 }
 
-                filtersJson.put("Final Price", localEndPrice);
+                filtersJson.put("Final price", localEndPrice);
             }
 
             int localStars;
