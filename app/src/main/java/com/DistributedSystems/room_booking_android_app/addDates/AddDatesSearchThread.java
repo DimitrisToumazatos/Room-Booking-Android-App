@@ -3,6 +3,7 @@ package com.DistributedSystems.room_booking_android_app.addDates;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 import com.DistributedSystems.room_booking_android_app.utils.Room;
@@ -39,6 +40,7 @@ public class AddDatesSearchThread extends Thread {
                 roomObjects.add(new Room(room));
             }
 
+            Log.d("poutsa", "3");
             Message msg = new Message();
             Bundle bundle = new Bundle();
             bundle.putSerializable("Rooms", roomObjects);

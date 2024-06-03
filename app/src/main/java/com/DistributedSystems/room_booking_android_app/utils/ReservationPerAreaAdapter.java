@@ -23,7 +23,7 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return reservationsPerArea.size();
+        return 0;
     }
 
     @Override
@@ -40,11 +40,11 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_res_list, parent, false);
+            convertView = inflater.inflate(R.layout.activity_per_area_item, parent, false);
         }
 
-        TextView nameTextView = convertView.findViewById(R.id.customerName);
-        TextView areaCountTextView = convertView.findViewById(R.id.startDate);
+        TextView nameTextView = convertView.findViewById(R.id.regionEditText);
+        TextView areaCountTextView = convertView.findViewById(R.id.reservationsEditText);
 
         Map.Entry<String, Integer> entry = searchMap(position);
         nameTextView.setText(entry.getKey());
