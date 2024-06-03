@@ -3,6 +3,7 @@ package com.DistributedSystems.room_booking_android_app.addDates;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.DistributedSystems.room_booking_android_app.utils.Dao;
 import com.DistributedSystems.room_booking_android_app.utils.Room;
@@ -30,14 +31,16 @@ public class AddDatesSearchThread extends Thread {
             Dao.getOut().writeObject("default search");
             Dao.getOut().flush();
 
-            roomStrings.addAll((List<String>) Dao.getIn().readObject());
+            ArrayList<String> roomList= (ArrayList<String>) Dao.getIn().readObject();
             roomImages.addAll((List<byte[]>) Dao.getIn().readObject());
 
             ArrayList<Room> roomObjects = new ArrayList<>();
 
-            for (String room : roomStrings){
+            for (String room : roomList){
                 roomObjects.add(new Room(room));
             }
+
+            roomStrings.addAll(roomList);
 
             Message msg = new Message();
             Bundle bundle = new Bundle();
