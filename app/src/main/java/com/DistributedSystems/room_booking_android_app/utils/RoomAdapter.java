@@ -3,6 +3,7 @@ package com.DistributedSystems.room_booking_android_app.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,13 +69,13 @@ public class RoomAdapter extends BaseAdapter {
         ArrayList<ArrayList<String>> availableDates;
         try {
             JSONObject json = (JSONObject) parser.parse(roomStrings.get(position));
-
+            Log.d("json", json.toString());
             nameTextView.setText((String) json.get("roomName"));
             idTextView.setText((Long.toString((Long) json.get("id"))));
             priceTextView.setText((Long.toString((Long) json.get("price"))));
             areaTextView.setText((String) json.get("area"));
             capacityTextView.setText((Long.toString((Long) json.get("noOfPersons"))));
-            starsTextView.setText((Long.toString((Long) json.get("stars"))));
+            starsTextView.setText((Float.toString(((Number) json.get("stars")).floatValue())));
             noOfReviewsTextView.setText((Long.toString((Long) json.get("noOfReviews"))));
             availableDates = (ArrayList<ArrayList<String>>) json.get("availableDates");
             fromTextView.setText(availableDates.get(0).get(0));
