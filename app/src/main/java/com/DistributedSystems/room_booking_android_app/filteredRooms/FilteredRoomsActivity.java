@@ -98,7 +98,7 @@ public class FilteredRoomsActivity extends AppCompatActivity implements Filtered
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            rooms = (ArrayList<Room>) message.getData().getSerializable("Rooms");
+            rooms = ((ArrayList<Room>) message.getData().getSerializable("Rooms"));
             adapter.notifyDataSetChanged();
             return false;
         }
