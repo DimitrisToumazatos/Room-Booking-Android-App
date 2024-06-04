@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -15,11 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.utils.ReservationAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ReservationPerAreaAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ReservationsPerAreaActivity extends AppCompatActivity implements ReservationsPerAreaView {
@@ -28,13 +25,11 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
     ListView reservationListView;
     String stDate;
     String depDate;
-    HashMap<String, Integer> reservationStrings = new HashMap<>();
+    List<String> reservationStrings = new ArrayList<>();
 
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            reservationStrings.putAll((HashMap<String, Integer>) message.getData().getSerializable("reservationStrings"));
-
             adapter.notifyDataSetChanged();
             return false;
         }
@@ -61,6 +56,8 @@ public class ReservationsPerAreaActivity extends AppCompatActivity implements Re
 
         ReservationsPerAreaThread t1 = new ReservationsPerAreaThread(myHandler, reservationStrings, stDate, depDate);
         t1.start();
+
+        adapter.notifyDataSetChanged();
 
         exitButton.setOnClickListener(v -> presenter.onExit());
 

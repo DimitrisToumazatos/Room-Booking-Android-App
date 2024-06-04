@@ -9,26 +9,25 @@ import android.widget.TextView;
 
 import com.DistributedSystems.room_booking_android_app.R;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class ReservationPerAreaAdapter extends BaseAdapter {
 
-    HashMap<String, Integer> reservationsPerArea;
+    List<String> reservationsPerArea;
     LayoutInflater inflater;
 
-    public ReservationPerAreaAdapter(LayoutInflater inflater, HashMap<String, Integer> reservationsPerArea){
+    public ReservationPerAreaAdapter(LayoutInflater inflater, List<String> reservationsPerArea){
         this.inflater = inflater;
         this.reservationsPerArea = reservationsPerArea;
     }
     @Override
     public int getCount() {
-        return 0;
+        return reservationsPerArea.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return reservationsPerArea.get(position);
     }
 
     @Override
@@ -43,24 +42,9 @@ public class ReservationPerAreaAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_per_area_item, parent, false);
         }
 
-        TextView nameTextView = convertView.findViewById(R.id.regionEditText);
-        TextView areaCountTextView = convertView.findViewById(R.id.reservationsEditText);
+        TextView reservationTextView = convertView.findViewById(R.id.reservationEditText);
+        reservationTextView.setText(reservationsPerArea.get(position));
 
-        Map.Entry<String, Integer> entry = searchMap(position);
-        nameTextView.setText(entry.getKey());
-        areaCountTextView.setText(entry.getValue().toString());
         return convertView;
-    }
-
-    public Map.Entry<String, Integer> searchMap(int position){
-
-        int count=0;
-        for(Map.Entry<String, Integer> entry: reservationsPerArea.entrySet()){
-            if (count==position-1){
-                return entry;
-            }
-            count++;
-        }
-        return null;
     }
 }
