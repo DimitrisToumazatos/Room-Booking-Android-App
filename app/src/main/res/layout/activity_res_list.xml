@@ -8,19 +8,8 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="401dp"
-        android:layout_height="130dp">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="136dp"
-            android:layout_height="124dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
+        android:layout_width="match_parent"
+        android:layout_height="126dp">
 
         <TextView
             android:id="@+id/customerName"
@@ -94,7 +83,7 @@
             android:layout_height="27dp"
             android:text="Room's id:"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/depDateMsg"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
