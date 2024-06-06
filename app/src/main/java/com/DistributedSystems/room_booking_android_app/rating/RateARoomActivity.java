@@ -24,6 +24,8 @@ import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unchecked")
+
 public class RateARoomActivity extends AppCompatActivity implements RateARoomView {
 
     EditText roomIdText, ratingText;

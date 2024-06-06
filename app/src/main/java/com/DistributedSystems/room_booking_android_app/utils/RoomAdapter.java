@@ -1,5 +1,6 @@
 package com.DistributedSystems.room_booking_android_app.utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -22,6 +23,8 @@ import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
+
 public class RoomAdapter extends BaseAdapter {
     List<String> roomStrings;
     List<byte []> roomImages;
@@ -40,7 +43,7 @@ public class RoomAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return roomStrings.get(position);
     }
 
     @Override
@@ -48,6 +51,7 @@ public class RoomAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -78,6 +82,7 @@ public class RoomAdapter extends BaseAdapter {
             starsTextView.setText((Float.toString(((Number) json.get("stars")).floatValue())));
             noOfReviewsTextView.setText((Long.toString((Long) json.get("noOfReviews"))));
             availableDates = (ArrayList<ArrayList<String>>) json.get("availableDates");
+            assert availableDates != null;
             fromTextView.setText(availableDates.get(0).get(0));
             toTextView.setText(availableDates.get(0).get(1));
 

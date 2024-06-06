@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.DistributedSystems.room_booking_android_app.R;
 import com.DistributedSystems.room_booking_android_app.managerConnection.ManagerConnectionActivity;
-import com.DistributedSystems.room_booking_android_app.utils.Room;
 import com.DistributedSystems.room_booking_android_app.utils.RoomAdapter;
 import com.DistributedSystems.room_booking_android_app.utils.ViewUtils;
 
@@ -36,14 +34,13 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
     Button addDatesButton;
     Boolean addDatesButtonEnabled;
     RoomAdapter roomAdapter;
-    ArrayList<Room> rooms;
     ArrayList<String> roomStrings = new ArrayList<>();
     ArrayList<byte []> roomImages = new ArrayList<>();
 
     public Handler myHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        //we set a rooms list for our tests and notify the adapter that a change has been made
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            rooms = (ArrayList<Room>) message.getData().getSerializable("Rooms");
             roomAdapter.notifyDataSetChanged();
             return false;
         }
@@ -53,6 +50,7 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
+        //we check all the text inputs from the user so as to enable the add dates button when they are all correct
         @RequiresApi(api = Build.VERSION_CODES.O)
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -60,11 +58,14 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
             startingDate = ViewUtils.getTextFromEditTextElement(startingDateText);
             departureDate = ViewUtils.getTextFromEditTextElement(departureDateText);
             boolean roomIdPassed = true, startingDatePassed = true, departureDatePassed = true;
+
             try{
                 Integer.parseInt(roomId);
             }catch(Exception e){
                 roomIdPassed = false;
             }
+
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate stDate = LocalDate.now(), depDate;
             try{
@@ -72,7 +73,6 @@ public class AddDatesActivity extends AppCompatActivity implements AddDatesView 
                 if(stDate.isBefore(LocalDate.now())){
                     startingDatePassed = false;
                 }
-
             }catch(Exception e){
 
                 startingDatePassed = false;

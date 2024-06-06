@@ -13,6 +13,7 @@ import android.os.Handler;
 
 import org.json.simple.parser.ParseException;
 
+@SuppressWarnings("unchecked")
 public class RateRoomSearchThread extends Thread {
 
     Handler handler;

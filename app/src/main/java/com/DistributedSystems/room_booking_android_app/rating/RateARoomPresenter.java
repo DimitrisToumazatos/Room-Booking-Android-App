@@ -1,6 +1,5 @@
 package com.DistributedSystems.room_booking_android_app.rating;
 
-
 import com.DistributedSystems.room_booking_android_app.utils.Room;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class RateARoomPresenter {
 
         boolean found = false;
         for (Room room : roomObjects){
-            if(roomIdInteger == ((Number)room.getId()).intValue()){
+            if(roomIdInteger == (room.getId()).intValue()){
                 found = true;
             }
         }

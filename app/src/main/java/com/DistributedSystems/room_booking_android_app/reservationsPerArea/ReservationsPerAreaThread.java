@@ -1,6 +1,5 @@
 package com.DistributedSystems.room_booking_android_app.reservationsPerArea;
 
-
 import android.os.Handler;
 import android.os.Message;
 
@@ -8,6 +7,8 @@ import com.DistributedSystems.room_booking_android_app.utils.Dao;
 
 import java.io.IOException;
 import java.util.List;
+
+@SuppressWarnings("unchecked")
 
 public class ReservationsPerAreaThread extends Thread{
 

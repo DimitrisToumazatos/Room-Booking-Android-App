@@ -30,30 +30,35 @@ public class FilteredRoomsPresenter {
         String ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG = "Your End Date is before the starting date!";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate startingDate = LocalDate.parse(stDate,formatter), departureDate = LocalDate.parse(depDate,formatter);
 
         if (!reservationButtonEnabled) {
-            int roomIdInteger = Integer.parseInt(roomId);
-            boolean found = false;
-            for (Room room : roomObjects){
-                if(roomIdInteger == ((Number)room.getId()).intValue()){
-                    found = true;
+            try{
+                LocalDate startingDate = LocalDate.parse(stDate,formatter), departureDate = LocalDate.parse(depDate,formatter);
+
+                int roomIdInteger = Integer.parseInt(roomId);
+                boolean found = false;
+                for (Room room : roomObjects){
+                    if(roomIdInteger == (room.getId()).intValue()){
+                        found = true;
+                    }
                 }
-            }
-            if(!found){
-                view.showToast(ERROR_INVALID_ROOM_ID);
-            }else if (LocalDate.now().isAfter(startingDate) || LocalDate.now().isAfter(departureDate)){
-                view.showToast(ERROR_DATE_PASSED_MSG);
-            } else if (startingDate.isAfter(departureDate)) {
-                view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
-            }else {
+                if(!found){
+                    view.showToast(ERROR_INVALID_ROOM_ID);
+                }else if (LocalDate.now().isAfter(startingDate) || LocalDate.now().isAfter(departureDate)){
+                    view.showToast(ERROR_DATE_PASSED_MSG);
+                } else if (startingDate.isAfter(departureDate)) {
+                    view.showToast(ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG);
+                }
+            }catch (Exception e) {
                 view.showToast(ERROR_EMPTY_FIELD_MSG);
             }
         } else{
+            LocalDate startingDate = LocalDate.parse(stDate,formatter), departureDate = LocalDate.parse(depDate,formatter);
+
             int roomIdInteger = Integer.parseInt(roomId);
             Room roomToReserve = null;
             for(Room room : roomObjects){
-                if(roomIdInteger == ((Number)room.getId()).intValue()){
+                if(roomIdInteger == (room.getId()).intValue()){
                     roomToReserve = room;
                 }
             }

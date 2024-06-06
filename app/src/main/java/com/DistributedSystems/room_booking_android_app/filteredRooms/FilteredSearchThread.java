@@ -13,6 +13,8 @@ import com.DistributedSystems.room_booking_android_app.utils.Room;
 
 import org.json.simple.parser.ParseException;
 
+@SuppressWarnings("unchecked")
+
 public class FilteredSearchThread extends Thread {
     Handler handler;
     ArrayList<String> roomStrings;

@@ -29,7 +29,6 @@ public class SearchRoomPresenter {
         String ERROR_STARTING_DATE_AFTER_DEPARTURE_MSG = "Your End Date is before the starting date!";
         String ERROR_BOTH_DATES_MSG = "Please enter both dates!";
         String ERROR_WRONG_DATES_GIVEN = "The departure date you gave is after the starting date";
-        String ERROR_AREA_NOT_STRING = "The area input you gave contains numerical values";
         String ERROR_WRONG_START_DATE_INPUT = "The start date you gave does not comply to a valid date input";
         String ERROR_WRONG_DEP_DATE_INPUT = "The departure date you gave does not comply to a valid date input";
         String ERROR_PERSONS_NOT_NUMERICAL = "The persons input you gave is not numerical";
@@ -56,7 +55,7 @@ public class SearchRoomPresenter {
                 return;
             }
 
-            LocalDate localStDate = null, localDepDate = null;
+            LocalDate localStDate, localDepDate;
             if(startingDate.isEmpty() && departureDate.isEmpty()){
                 filtersJson.put("Starting Date", null);
                 filtersJson.put("Departure Date", null);
@@ -174,15 +173,4 @@ public class SearchRoomPresenter {
         view.searchRoom(search);
     }
 
-    public boolean isAlpha(String name) {
-        char[] chars = name.toCharArray();
-
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 }

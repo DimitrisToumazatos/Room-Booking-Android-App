@@ -28,6 +28,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+@SuppressWarnings("unchecked")
+
 public class FilteredRoomsActivity extends AppCompatActivity implements FilteredRoomsView {
     EditText roomIdText, stDateText, depDateText, customerNameText;
     ListView roomListView;

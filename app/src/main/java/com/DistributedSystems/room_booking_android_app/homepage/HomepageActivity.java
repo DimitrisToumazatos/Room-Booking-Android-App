@@ -30,8 +30,9 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             managerName = ViewUtils.getTextFromEditTextElement(managerNameText);
+            boolean managerNamePassed = isAlpha(managerName);
 
-            if (managerName.isEmpty()) {
+            if (managerName.isEmpty() || !managerNamePassed) {
                 managerButton.setAlpha(0.5f);
                 managerButtonEnabled = false;
             } else {
@@ -83,5 +84,17 @@ public class HomepageActivity extends AppCompatActivity implements HomepageView 
 
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
